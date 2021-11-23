@@ -1,114 +1,109 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 @import url("https://fonts.adobe.com/fonts/freight-text");
-
 *, *::after, *::before {
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  color: white;
 }
 
 ::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 ::-moz-selection {
-    background: grey;
+  background: grey;
 }
 
 ::selection {
-    background: grey;
+  background: grey;
 }
 
-.webgl
-{
-    position: fixed;
-    top: 0;
-    left: 0;
-    outline: none;
-    padding: 1em;
+.webgl {
+  position: fixed;
+  top: 0;
+  left: 0;
+  outline: none;
+  z-index: 999;
+}
+
+a {
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+  color: white;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 #loading-screen {
-    position: absolute;
-    z-index: 999;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #000000;
-    opacity: 1;
-    -webkit-transition: 1s opacity;
-    transition: 1s opacity;
-  }
-  
-  #loading-screen.fade-out {
-    opacity: 0;
-    display: none;
-  }
-  
-  #loader {
-    display: block;
-    position: relative;
-    left: 45%;
-    top: 50%;
-    width: 0;
-    height: 3px;
-    background-color: white;
-  }
-
-
-
-
-
-/* Loading Screen */
-
-#loading-screen {
-	position: absolute;
-	z-index: 999;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: #000000;
-	opacity: 1;
- 	transition: 1s opacity;
+  position: absolute;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  opacity: 1;
+  -webkit-transition: 1s opacity;
+  transition: 1s opacity;
 }
 
 #loading-screen.fade-out {
-    opacity: 0;
-    display: none;
+  opacity: 0;
+  display: none;
 }
 
 #loader {
-    display: block;
-    position: relative;
-    left: 45%;
-    top: 50%;
-    width: 2em;
-    height: 3px;
-    background-color: white;
-    -webkit-animation: infinityAnim 1.5s infinite alternate-reverse;
-    animation: infinityAnim 1.5s infinite alternate-reverse;
+  display: block;
+  position: relative;
+  left: 45%;
+  top: 50%;
+  width: 0;
+  height: 3px;
+  background-color: white;
+}
+
+/* Loading Screen */
+#loading-screen {
+  position: absolute;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  opacity: 1;
+  transition: 1s opacity;
+}
+
+#loading-screen.fade-out {
+  opacity: 0;
+  display: none;
+}
+
+#loader {
+  display: block;
+  position: relative;
+  left: 45%;
+  top: 50%;
+  width: 2em;
+  height: 3px;
+  background-color: white;
+  -webkit-animation: infinityAnim 1.5s infinite alternate-reverse;
+  animation: infinityAnim 1.5s infinite alternate-reverse;
 }
 
 @-webkit-keyframes infinityAnim {
-  0%   {
-      -webkit-transform: translate(0, 0);
-      -ms-transform: translate(0, 0);
-      transform: translate(0, 0);
-  }
-  100% {
-      -webkit-transform: translate(40px, 0);
-      -ms-transform: translate(40px, 0);
-      transform: translate(40px, 0);
-  }
-}
-@keyframes infinityAnim {
-  0%   {
-      -webkit-transform: translate(0, 0);
-      -ms-transform: translate(0, 0);
-      transform: translate(0, 0);
+  0% {
+    -webkit-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    transform: translate(0, 0);
   }
   100% {
     -webkit-transform: translate(40px, 0);
@@ -116,10 +111,143 @@
     transform: translate(40px, 0);
   }
 }
-
+@keyframes infinityAnim {
+  0% {
+    -webkit-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    transform: translate(0, 0);
+  }
+  100% {
+    -webkit-transform: translate(40px, 0);
+    -ms-transform: translate(40px, 0);
+    transform: translate(40px, 0);
+  }
+}
 @media only screen and (min-width: 850px) {
   #loader {
     left: 49%;
   }
 }
-  
+/* STYLE WEB PAGE */
+.navbar nav {
+  margin: 2em;
+  display: flex;
+  justify-content: space-between;
+}
+.navbar nav .logo {
+  width: 2em;
+  display: flex;
+}
+.navbar nav .logo a {
+  font-size: 1.5em;
+  color: white;
+  width: 0.7em;
+  transition: width 0.5s;
+}
+.navbar nav .logo a .first, .navbar nav .logo a .second {
+  font-size: 0.7em;
+  opacity: 0;
+  transition: opacity 0.5s;
+  color: white;
+}
+.navbar nav .logo:hover .word-1 {
+  width: 3em;
+  transition: all 0.3s ease-in-out;
+}
+.navbar nav .logo:hover .word-1 .first {
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+  transition-delay: 0.3s;
+  pointer-events: none;
+}
+.navbar nav .logo:hover .word-2 {
+  width: 2em;
+  transition: all 0.5s ease-in-out;
+}
+.navbar nav .logo:hover .word-2 .second {
+  opacity: 1;
+  pointer-events: none;
+  transition: opacity 0.3s ease-out;
+  transition-delay: 0.3s;
+}
+.navbar nav ul {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  column-gap: 1em;
+}
+.navbar nav ul a {
+  color: white;
+  -webkit-transition: color 0.7s;
+  transition: color 0.7s;
+}
+.navbar nav ul a:hover {
+  color: #979797;
+}
+
+.home {
+  width: 100vw;
+  height: 100vh;
+}
+.home .container {
+  margin: 0 auto;
+  width: 90%;
+}
+.home .container form {
+  display: grid;
+  grid-template-columns: 1;
+}
+.home .container form input[type=text], .home .container form input[type=number] {
+  width: 10%;
+  height: 0.5em;
+  padding: 12px 20px;
+  margin: 8px 1em;
+  border: none;
+  border-bottom: 2px solid;
+  border-color: white;
+  -webkit-transition: 1s border-color;
+  transition: 1s border-color;
+  background-color: rgba(255, 255, 255, 0);
+  color: white;
+  text-align: center;
+}
+.home .container form input[type=text]:focus, .home .container form input[type=number]:focus {
+  outline: none;
+  border-color: #555555;
+  -webkit-transition: 1s border-color;
+  transition: 1s border-color;
+  box-shadow: none;
+  text-align: center;
+  color: white;
+}
+.home .container form input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+.home .container form input[type=submit] {
+  display: block;
+  margin: 2em auto;
+  color: white;
+  transition: background-color 2s;
+  -webkit-transition: background-color 2s;
+  background-color: #202020;
+  border: none;
+  width: 5em;
+  height: 3em;
+  cursor: pointer;
+}
+.home .container form input[type=submit]:hover {
+  transition: background-color 2s;
+  background-color: rgba(53, 53, 53, 0);
+}
+.home .container .simulator {
+  margin: 5em auto;
+  width: 50%;
+  height: 50%;
+}
+
+@media only screen and (min-width: 1800px) {
+  .navbar .container {
+    width: 80%;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
