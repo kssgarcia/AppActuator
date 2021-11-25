@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
@@ -64,9 +65,8 @@ class HeroThree {
     this.Resize();
     this.Settings();
     this.setLights();
-    this.Material();
-    this.sphereWave();
     this.PlaneWave();
+    this.sphereWave();
     this.addDebug();
     this.PostProcessing();
     this.Tick();
@@ -184,13 +184,39 @@ class HeroThree {
     }
   }
 
-  Material()
+  sphereWave()
   {
+ 
+   // Material
+    this.materialWaveS = new THREE.ShaderMaterial({
+      uniforms:
+      {
+        uTime: { value: 0 },
+        uLightA: { value: new THREE.Vector3(14, 0, 10) },
+        uLightB: { value: new THREE.Vector3(-14, 0, -10) }
+      },
+      vertexShader: vertexShaderSphere,
+      fragmentShader: fragmentShaderSphere
+    })
+
+    // Sphere
+    this.sphereGeometry = new THREE.SphereGeometry(1, 550, 550)
+    this.sphere = new THREE.Mesh(this.sphereGeometry, this.materialWave)
+    this.sphere.position.set(0, 3, 0)
+    scene.add(this.sphere)
+  }
+
+ 
+  PlaneWave()
+  {
+    this.geometry = new THREE.PlaneGeometry(0.8, 0.8, 500, 500);
+ 
     // Material
     this.materialWave = new THREE.ShaderMaterial({
       uniforms:
       {
         uTime: { value: 0 },
+        uSubdivision: { value: new THREE.Vector2(500, 500) },
 
         uLightAColor: { value: this.lights.a.color.instance },
         uLightAPosition: { value: new THREE.Vector3(1, 1, 0) },
@@ -198,15 +224,12 @@ class HeroThree {
 
         uLightBColor: { value: this.lights.b.color.instance },
         uLightBPosition: { value: new THREE.Vector3(- 1, - 1, 0) },
-        uLightBIntensity: { value: this.lights.b.intensity }, 
-
-        uSubdivision: { value: new THREE.Vector2(500, 500) },
 
         uOffset: { value: new THREE.Vector3() },
         
         uDistortionFrequency: { value: 0.5 },
         uDistortionStrength: { value: 10.65 },
-        uDisplacementFrequency: { value: 0.5 },
+        uDisplacementFrequency: { value: 2.120 },
         uDisplacementStrength: { value: 0.152 },
 
         uFresnelOffset: { value: -1.609 },
@@ -220,34 +243,9 @@ class HeroThree {
       vertexShader: vertexShaderPlane,
       fragmentShader: fragmentShaderPlane
     })
-  }
 
-  sphereWave()
-  {
-   // Material
-    this.materialWaveS = new THREE.ShaderMaterial({
-      uniforms:
-      {
-        uTime: { value: 0 },
-        uLightA: { value: new THREE.Vector3(14, 0, 10) },
-        uLightB: { value: new THREE.Vector3(-14, 0, -10) }
-      },
-      vertexShader: vertexShaderSphere,
-      fragmentShader: fragmentShaderSphere
-    })
-    // Sphere
-    this.sphereGeometry = new THREE.SphereGeometry(3, 512, 512)
-    this.sphereGeometry.computeTangents()
-    this.sphere = new THREE.Mesh(this.sphereGeometry, this.materialWave)
-    scene.add(this.sphere)
-  }
- 
-  PlaneWave()
-  {
-    this.geometry = new THREE.PlaneGeometry(0.8, 0.8, 500, 500);
     this.plane = new THREE.Mesh(this.geometry, this.materialWave);
     this.plane.rotation.set(0, 90, 0)
-    this.plane.visible = false
     scene.add(this.plane);
   }
 
@@ -316,8 +314,8 @@ class HeroThree {
 
   Settings() 
   {
-    camera = new THREE.PerspectiveCamera(75, this.sizes.width / this.sizes.height, 0.1, 15);     
-    camera.position.set(0, 0, 5);
+    camera = new THREE.PerspectiveCamera(75, this.sizes.width / this.sizes.height, 0.1, 100);     
+    camera.position.set(0, 0, 1);
     // Controls
     controls = new OrbitControls(camera, canvas)
     controls.enableDamping = true
@@ -382,7 +380,7 @@ class HeroThree {
         bloomPass.tintColor.instance = new THREE.Color(bloomPass.tintColor.value)
         
         bloomPass.compositeMaterial.uniforms.uTintColor = { value: bloomPass.tintColor.instance }
-        bloomPass.compositeMaterial.uniforms.uTintStrength = { value: 0.0  }
+        bloomPass.compositeMaterial.uniforms.uTintStrength = { value: 0.15 }
         bloomPass.compositeMaterial.fragmentShader = `
 varying vec2 vUv;
 uniform sampler2D blurTexture1;
@@ -453,7 +451,7 @@ void main() {
     effectcomposer = new EffectComposer( renderer, renderTarget );
     effectcomposer.setSize(this.sizes.width, this.sizes.height)
     effectcomposer.addPass( renderScene );
-    effectcomposer.addPass( bloomPass );
+    //effectcomposer.addPass( bloomPass );
     //effectcomposer.addPass( rgbShader );
     //effectcomposer.addPass(this.finalPass);
     //effectcomposer.addPass( grainShader );
