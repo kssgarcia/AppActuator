@@ -1,6 +1,10 @@
 uniform float uTime;
+uniform vec3 uLight;
+uniform vec2 uSubdivision;
 
-varying float vStrength;
+varying float vHeight;
+varying vec3 vlightColor;
+varying vec3 v_worldNormal;
 
 
 //	Classic Perlin 3D Noise 
@@ -84,14 +88,29 @@ float cnoise(vec3 P){
 
 void main()
 {
- 
-  float strength = sin(cnoise(vec3(uv * 2.0, uTime * 0.0001)) * 5.0);
+  
+  float height = sin(cnoise(vec3(uv * 5.0, uTime * 0.0001)) * 10.0);
   vec3 newPosition = position;
-  newPosition.z = strength;
+  newPosition.z += height*2.0;
+
   vec4 modelPosition = modelMatrix * vec4(newPosition, 1.0);
   vec4 viewPosition = viewMatrix * modelPosition;
   vec4 projectionPosition = projectionMatrix * viewPosition;
   gl_Position = projectionPosition;
 
-  vStrength = strength;
+  // Bi tangents
+  float distanceA = (M_PI * 2.0) / uSubdivision.x;
+  float distanceB = M_PI / uSubdivision.x;
+
+  vec3 biTangent = cross(normal, tangent.xyz);
+
+  //Color
+  vHeight = height;
+  vec3 LightNormal = normalize(vec3(uLight) - vec3(0.0, 0.0, 0.0));
+  float diffuse = max(0.0, dot(normal, LightNormal));
+  
+  vec3 mixColor = mix(vec3(0.0, 0.0, 0.0), vec3(1.0, 1.0, 1.0), diffuse);
+
+  v_worldNormal = vec3(0.0, 0.0, 0.0);
+  vlightColor = mixColor; 
 }

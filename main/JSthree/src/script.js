@@ -13,13 +13,11 @@ import finalPassShaderVertex from './Shaders/FinalPass/vertex.glsl';
 import finalPassShaderFragment from './Shaders/FinalPass/fragment.glsl';
 import grainShaderVertex from './Shaders/Grain/vertex.glsl';
 import grainShaderFragment from './Shaders/Grain/fragment.glsl'
-import vertexShaderParticles from './Shaders/particles/vertex.glsl'
-import fragmentShaderParticles from './Shaders/particles/fragment.glsl'
+import vertexShaderSphere from './Shaders/particles/vertex.glsl'
+import fragmentShaderSphere from './Shaders/particles/fragment.glsl'
 import fragmentShaderPlane from './Shaders/Plane/Fragment.glsl'
 import vertexShaderPlane from './Shaders/Plane/Vertex.glsl'
-import FlowField from './FlowField.js'
 import Time from './Utils/Time.js'
-
 
 // New effect composer 
 
@@ -59,8 +57,7 @@ class HeroThree {
     this.setPositions();
     this.Resize();
     this.Settings();
-    this.setFlowfield();
-    this.Particles();
+    this.sphereWave();
     this.PlaneWave();
     this.PostProcessing();
     this.Tick();
@@ -86,73 +83,54 @@ class HeroThree {
     }
   }
 
-  setFlowfield()
+  sphereWave()
   {
-    this.flowField = new FlowField({ positions: this.positions, debugFolder: this.debugFolder }, renderer, clock, scene)
-  }
-
-  Particles()
-  {
-    // Set geometry
-    const size = new Float32Array(this.count)
-    const uv = new Float32Array(this.count * 2)
-
-    for(let i = 0; i < this.count; i++)
-    {
-      size[i] = 0.2 + Math.random() * 0.8
-    }
-
-    for(let j = 0; j < this.height; j++)
-    {
-      for(let i = 0; i < this.width; i++)
-      {
-        uv[(j * this.width * 2) + (i * 2) + 0] = i / this.width
-        uv[(j * this.width * 2) + (i * 2) + 1] = j / this.height
-      }
-    }
-
-    this.geometry = new THREE.BufferGeometry()
-    this.geometry.setAttribute('position', new THREE.BufferAttribute(this.positions, 3))
-    this.geometry.setAttribute('aSize', new THREE.BufferAttribute(size, 1))
-    this.geometry.setAttribute('aFboUv', this.flowField.fboUv.attribute)
-    this.geometry.setAttribute('aUv', new THREE.BufferAttribute(uv, 2))
-
-    // Material
-    this.material = new THREE.ShaderMaterial({
+ 
+   // Material
+    this.materialWaveS = new THREE.ShaderMaterial({
       uniforms:
       {
-        uSize: { value: 50 * 1 },
-        uFBOTexture: { value: this.flowField.texture },
-        uTime: { uTime: 0 }
+        uTime: { value: 0 },
+        uLightA: { value: new THREE.Vector3(14, 0, 10) },
+        uLightB: { value: new THREE.Vector3(-14, 0, -10) }
       },
-      vertexShader: vertexShaderParticles,
-      fragmentShader: fragmentShaderParticles
+      vertexShader: vertexShaderSphere,
+      fragmentShader: fragmentShaderSphere
     })
 
-    this.points = new THREE.Points(this.geometry, this.material)
-    scene.add(this.points)
+    // Sphere
+    this.sphereGeometry = new THREE.SphereGeometry(30, 550, 550)
+    this.sphere = new THREE.Mesh(this.sphereGeometry, this.materialWaveS)
+    this.sphere.position.set(0, 50, 0)
+    scene.add(this.sphere)
   }
 
+ 
   PlaneWave()
   {
-    this.geometry = new THREE.PlaneGeometry(90, 50, 200, 200);
-    this.material = new THREE.MeshBasicMaterial({color: 0xffffff});
+    this.geometry = new THREE.PlaneGeometry(90, 50, 500, 500);
  
     // Material
-    this.planeMaterial = new THREE.ShaderMaterial({
+    this.materialWave = new THREE.ShaderMaterial({
       uniforms:
       {
-        uTime: { uTime: 0 }
+        uTime: { value: 0 },
+        uLight: { value: new THREE.Vector3(0, 100, 200) },
+        uSubdivision: { value: new THREE.Vector2(500, 500) },
+      },
+      defines:
+      {
+        USE_TANGENT: ''
       },
       vertexShader: vertexShaderPlane,
       fragmentShader: fragmentShaderPlane
     })
 
-    this.plane = new THREE.Mesh(this.geometry, this.planeMaterial);
+    this.plane = new THREE.Mesh(this.geometry, this.materialWave);
     scene.add(this.plane);
   }
 
-  Resize() 
+   Resize() 
   {
     this.sizes = {
       width: window.innerWidth,
@@ -180,7 +158,7 @@ class HeroThree {
   Settings() 
   {
     camera = new THREE.PerspectiveCamera(75, this.sizes.width / this.sizes.height, 0.1, 100);     
-    camera.position.set(0, 0, 12);
+    camera.position.set(0, 0, 70);
     // Controls
     controls = new OrbitControls(camera, canvas)
     controls.enableDamping = true
@@ -200,13 +178,9 @@ class HeroThree {
     // Elapsed time
     const elapsedTime = clock.elapsed;
 
-    // Flowfield update
-    this.flowField.update()
-    this.points.material.uniforms.uFBOTexture.value = this.flowField.texture
-    this.points.material.uniforms.uTime.value = elapsedTime;
-
-    // Plane update 
+    // Material update 
     this.plane.material.uniforms.uTime.value = elapsedTime;
+    this.sphere.material.uniforms.uTime.value = elapsedTime;
 
     // Controls update
     controls.update();
@@ -223,21 +197,17 @@ class HeroThree {
   PostProcessing() 
   {
     let RenderTargetClass = null
-    if(renderer.getPixelRatio() === 1 && renderer.capabilities.isWebGL2) {
-      RenderTargetClass = THREE.WebGLMultisampleRenderTarget
-    }
-    else {
-      RenderTargetClass = THREE.WebGLRenderTarget
-      console.log('Using WebGLRenderTarget')
-    }
 
+    RenderTargetClass = renderer.getPixelRatio() >= 2 ? THREE.WebGLRenderTarget : THREE.WebGLMultisampleRenderTarget
+    
     const renderTarget = new RenderTargetClass(
-      800,
-      600,
+      window.innerWidth,
+      window.innerHeight,
       {
+        generateMipmaps: false,
         minFilter: THREE.LinearFilter,
         magFilter: THREE.LinearFilter,
-        format: THREE.RGBAFormat,
+        format: THREE.RGBFormat,
         encoding: THREE.sRGBEncoding
       }
     )
@@ -324,7 +294,7 @@ void main() {
     effectcomposer = new EffectComposer( renderer, renderTarget );
     effectcomposer.setSize(this.sizes.width, this.sizes.height)
     effectcomposer.addPass( renderScene );
-    effectcomposer.addPass( bloomPass );
+    //effectcomposer.addPass( bloomPass );
     //effectcomposer.addPass( rgbShader );
     //effectcomposer.addPass(this.finalPass);
     //effectcomposer.addPass( grainShader );
