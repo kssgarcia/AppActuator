@@ -13,19 +13,20 @@ import finalPassShaderVertex from './Shaders/FinalPass/vertex.glsl';
 import finalPassShaderFragment from './Shaders/FinalPass/fragment.glsl';
 import grainShaderVertex from './Shaders/Grain/vertex.glsl';
 import grainShaderFragment from './Shaders/Grain/fragment.glsl'
-import vertexShaderSphere from './Shaders/particles/vertex.glsl'
-import fragmentShaderSphere from './Shaders/particles/fragment.glsl'
-import fragmentShaderPlane from './Shaders/Plane/Fragment.glsl'
-import vertexShaderPlane from './Shaders/Plane/Vertex.glsl'
+import pointShadervertex from './Shaders/Points/pointVertex.glsl';
+import pointShaderFragment from './Shaders/Points/pointFragment.glsl';
 import Time from './Utils/Time.js'
 import { Pane } from 'tweakpane'
-// New effect composer 
 
+// New effect composer 
 
 let isAndroid = false;
 if( /Android|webOS|iPhone|iPad|Mac|Macintosh|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
   isAndroid = true;
 }
+
+const textureLoader = new THREE.TextureLoader();
+const noiseTexture = textureLoader.load('./texture.jpg');
 
 let loadingManager;
 let canvas, scene, camera, controls;
@@ -47,11 +48,6 @@ class HeroThree {
     this.count = this.width * this.height;
     clock = new Time();
 
-    this.dracoLoader = new DRACOLoader();
-    this.dracoLoader.setDecoderPath('draco/');
-    this.gltfLoader = new GLTFLoader(loadingManager);
-    this.gltfLoader.setDRACOLoader(this.dracoLoader);
-
     // Config debug
     this.setDebug();
     this.debugFolder = this.debug.addFolder({
@@ -59,15 +55,17 @@ class HeroThree {
       expanded: true
     })
 
+    this.dracoLoader = new DRACOLoader();
+    this.dracoLoader.setDecoderPath('draco/');
+    this.gltfLoader = new GLTFLoader(loadingManager);
+    this.gltfLoader.setDRACOLoader(this.dracoLoader);
+
     //Objects
-    this.setPositions();
+    this.Material();
+    this.Geometry();
+    this.addDebug();
     this.Resize();
     this.Settings();
-    this.setLights();
-    this.Material();
-    this.sphereWave();
-    this.PlaneWave();
-    this.addDebug();
     this.PostProcessing();
     this.Tick();
   }
@@ -88,204 +86,50 @@ class HeroThree {
     } );
   }
 
-  setPositions()
+  Material() 
   {
-    // Set Positions
-    this.positions = new Float32Array(this.count * 3);
-
-    for(let i = 0; i < this.count; i++)
-    {
-      this.positions[i] = (Math.random() - 0.5) * 10
-    }
-  }
-
-  setLights()
-  {
-    this.lights = {}
-
-    // Light A
-    this.lights.a = {}
-
-    this.lights.a.intensity = 1.85
-
-    this.lights.a.color = {}
-    this.lights.a.color.value = '#ff3e00'
-    this.lights.a.color.instance = new THREE.Color(this.lights.a.color.value)
-
-    this.lights.a.spherical = new THREE.Spherical(1, 0.615, 2.049)
-
-    // Light B
-    this.lights.b = {}
-
-    this.lights.b.intensity = 1.4
-
-    this.lights.b.color = {}
-    this.lights.b.color.value = '#0063ff'
-    this.lights.b.color.instance = new THREE.Color(this.lights.b.color.value)
-
-    this.lights.b.spherical = new THREE.Spherical(1, 2.561, - 1.844)
-
-    // Debug
-    if(this.debug)
-    {
-      for(const _lightName in this.lights)
-      {
-        const light = this.lights[_lightName]
-
-        const debugFolder = this.debugFolder.addFolder({
-          title: _lightName,
-          expanded: true
-        })
-
-        debugFolder
-          .addInput(
-            light.color,
-            'value',
-            { view: 'color', label: 'color' }
-          )
-          .on('change', () =>
-            {
-              light.color.instance.set(light.color.value)
-            })
-
-        debugFolder
-          .addInput(
-            light,
-            'intensity',
-            { min: 0, max: 10 }
-          )
-          .on('change', () =>
-            {
-              this.materialWave.uniforms[`uLight${_lightName.toUpperCase()}Intensity`].value = light.intensity
-            })
-
-        debugFolder
-          .addInput(
-            light.spherical,
-            'phi',
-            { label: 'phi', min: 0, max: Math.PI, step: 0.001 }
-          )
-          .on('change', () =>
-            {
-              this.materialWave.uniforms[`uLight${_lightName.toUpperCase()}Position`].value.setFromSpherical(light.spherical)
-            })
-
-        debugFolder
-          .addInput(
-            light.spherical,
-            'theta',
-            { label: 'theta', min: - Math.PI, max: Math.PI, step: 0.001 }
-          )
-          .on('change', () =>
-            {
-              this.materialWave.uniforms.uLightAPosition.value.setFromSpherical(light.spherical)
-            })
-      }
-    }
-  }
-
-  Material()
-  {
-    // Material
-    this.materialWave = new THREE.ShaderMaterial({
-      uniforms:
-      {
-        uTime: { value: 0 },
-
-        uLightAColor: { value: this.lights.a.color.instance },
-        uLightAPosition: { value: new THREE.Vector3(1, 1, 0) },
-        uLightAIntensity: { value: this.lights.a.intensity },
-
-        uLightBColor: { value: this.lights.b.color.instance },
-        uLightBPosition: { value: new THREE.Vector3(- 1, - 1, 0) },
-        uLightBIntensity: { value: this.lights.b.intensity }, 
-
-        uSubdivision: { value: new THREE.Vector2(500, 500) },
-
-        uOffset: { value: new THREE.Vector3() },
-        
-        uDistortionFrequency: { value: 0.5 },
-        uDistortionStrength: { value: 10.65 },
-        uDisplacementFrequency: { value: 0.5 },
-        uDisplacementStrength: { value: 0.152 },
-
-        uFresnelOffset: { value: -1.609 },
-        uFresnelMultiplier: { value: 3.587 },
-        uFresnelPower: { value: 1.793 },
-      },
-      defines:
-      {
-        USE_TANGENT: ''
-      },
-      vertexShader: vertexShaderPlane,
-      fragmentShader: fragmentShaderPlane
+    this.material = new THREE.ShaderMaterial({
+        uniforms: {
+            uTime: { value:0 },
+            uColor1: { value: new THREE.Color('black') },
+            uColor2: { value: new THREE.Color('#757575') },
+            uTouch: { value: null },
+            uTexture: { value: noiseTexture },
+            uProgress: {value: 1.6},
+            uScroll: { value: 0 },
+            uFactor: { value: 1000 }
+        },
+        vertexShader: pointShadervertex,
+        fragmentShader: pointShaderFragment
     })
-  }
 
-  sphereWave()
+    // touch = new TouchTexture();
+    // pointMaterial.uniforms.uTouch.value = touch.texture;
+}
+
+  Geometry()
   {
-   // Material
-    this.materialWaveS = new THREE.ShaderMaterial({
-      uniforms:
-      {
-        uTime: { value: 0 },
-        uLightA: { value: new THREE.Vector3(14, 0, 10) },
-        uLightB: { value: new THREE.Vector3(-14, 0, -10) }
-      },
-      vertexShader: vertexShaderSphere,
-      fragmentShader: fragmentShaderSphere
-    })
-    // Sphere
-    this.sphereGeometry = new THREE.SphereGeometry(3, 512, 512)
-    this.sphereGeometry.computeTangents()
-    this.sphere = new THREE.Mesh(this.sphereGeometry, this.materialWave)
-    scene.add(this.sphere)
-  }
- 
-  PlaneWave()
-  {
-    this.geometry = new THREE.PlaneGeometry(0.8, 0.8, 500, 500);
-    this.plane = new THREE.Mesh(this.geometry, this.materialWave);
-    this.plane.rotation.set(0, 90, 0)
-    this.plane.visible = false
-    scene.add(this.plane);
+    this.plane = new THREE.Mesh(new THREE.PlaneGeometry(10.3, 5.7), this.material);
+    scene.add(this.plane)
   }
 
   addDebug()
   {
     this.debugFolder.addInput(
-      this.materialWave.uniforms.uDistortionFrequency,
+      this.material.uniforms.uProgress,
       'value',
-      { label: 'uDistortionFrequency', min: 0, max: 10, step: 0.001 }
+      { label: 'uProgress', min: 0, max: 10, step: 0.001 }
     )
     this.debugFolder.addInput(
-      this.materialWave.uniforms.uDistortionStrength,
+      this.material.uniforms.uScroll,
       'value',
-      { label: 'uDistortionStrength', min: 0, max: 10, step: 0.001 }
-    )
-
-    this.debugFolder.addInput(
-      this.materialWave.uniforms.uDisplacementFrequency,
-      'value',
-      { label: 'uDisplacementFrequency', min: 0, max: 5, step: 0.001 }
+      { label: 'uScroll', min: 0, max: 10, step: 0.001 }
     )
 
     this.debugFolder.addInput(
-      this.materialWave.uniforms.uDisplacementStrength,
+      this.material.uniforms.uFactor,
       'value',
-      { label: 'uDisplacementStrength', min: 0, max: 1, step: 0.001 }
-    )
-
-    this.debugFolder.addInput(
-      this.materialWave.uniforms.uFresnelOffset,
-      'value',
-      { label: 'uFresnelOffset', min: - 2, max: 2, step: 0.001 }
-    )
-
-    this.debugFolder.addInput(
-      this.materialWave.uniforms.uFresnelMultiplier,
-      'value',
-      { label: 'uFresnelMultiplier', min: 0, max: 5, step: 0.001 }
+      { label: 'uFactor', min: 0, max: 2000, step: 1 }
     )
   }
 
@@ -317,10 +161,7 @@ class HeroThree {
   Settings() 
   {
     camera = new THREE.PerspectiveCamera(75, this.sizes.width / this.sizes.height, 0.1, 15);     
-    camera.position.set(0, 0, 5);
-    // Controls
-    controls = new OrbitControls(camera, canvas)
-    controls.enableDamping = true
+    camera.position.set(0, 0, 3);
 
     scene.add(camera);
 
@@ -339,10 +180,6 @@ class HeroThree {
 
     // Material update 
     this.plane.material.uniforms.uTime.value = elapsedTime;
-    this.sphere.material.uniforms.uTime.value = elapsedTime;
-
-    // Controls update
-    controls.update();
 
     // Update Post-processing
     effectcomposer.render(); 
@@ -454,9 +291,9 @@ void main() {
     effectcomposer.setSize(this.sizes.width, this.sizes.height)
     effectcomposer.addPass( renderScene );
     effectcomposer.addPass( bloomPass );
-    //effectcomposer.addPass( rgbShader );
+    effectcomposer.addPass( rgbShader );
     //effectcomposer.addPass(this.finalPass);
-    //effectcomposer.addPass( grainShader );
+    effectcomposer.addPass( grainShader );
   }
 }
 

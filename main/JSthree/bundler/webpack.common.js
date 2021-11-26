@@ -11,6 +11,14 @@ module.exports = {
         filename: 'bundle.js',
         path: path.resolve(__dirname, '../../static/main/js')
     },
+    plugins:
+    [
+        new CopyWebpackPlugin({
+            patterns: [
+                { from: path.resolve(__dirname, '../static') }
+            ]
+        }),
+    ],
     module:
     {
         rules:
