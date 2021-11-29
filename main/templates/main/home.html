@@ -1,17 +1,27 @@
 {% extends "main/base.html" %}
 {% load static %}
 {% block content %}
-<div class="panel"></div>
 <section class="home">
   <div class="container">
-    <form method="post">
-      {% csrf_token %}
-      {{ form }}
-      <input type="submit" value="Submit" class="button">
-    </form>
+    <div class="button">
+      <button class="inputs-button" type="button">Inputs</button>
+    </div>
+    <div class="cform">
+      <form class="form-inputs" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Submit" class="button">
+      </form>   
+      <div class="exit">
+        <div class="line-1"></div>
+        <div class="line-2"></div>
+      </div>
+    </div>
   </div>
 </section>
 
 <canvas class="webgl"></canvas>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
 <script src="{% static 'main/js/bundle.js' %}"></script>
+<script src="{% static 'main/js/mobile.js' %}"></script>
 {% endblock content %}
