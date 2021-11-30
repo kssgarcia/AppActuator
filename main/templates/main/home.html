@@ -19,7 +19,19 @@
     </div>
   </div>
   <div class="container-table">
-    <table id="table-result"></table>
+    <table id="table-result">
+      <thead> <tr>
+          <th>Count</th>
+          <th>ActuatorLenInit</th>
+          <th>Stroke</th>
+          <th>Force[N]</th>
+          <th>A2X</th>
+          <th>A2Y</th>
+          <th>A1X</th>
+          <th>A1Y</th>
+          <th>ActuatorLenEnd</th>
+        </tr> </thead>
+    </table>
   </div>
 </section>
 <canvas class="webgl"></canvas>
@@ -32,26 +44,25 @@
   submitBtn.addEventListener('click', (event) => {
       event.preventDefault()
       let data = JSON.parse("{{data|escapejs}}")
+      console.log(data)
       let result = document.getElementById("table-result")
       const searchData = data.dataSearch
+
       for (let i=0; i<data.dataSearch.Count.length; i++ )
       {
           result.innerHTML += `<tr>
-          <th>${searchData.Count[i]}</th>
           <th>${searchData["Count"][i]}</th>
-          <th>${searchData["ActuatorLenInit"][i]}</th>
-          <th>${searchData["Stroke"][i]}</th>
-          <th>${searchData["Force[N]"][i]}</th>
-          <th>${searchData["A2X"][i]}</th>
-          <th>${searchData["A2Y"][i]}</th>
-          <th>${searchData["A1X"][i]}</th>
-          <th>${searchData["A1Y"][i]}</th>
-          <th>${searchData["ActuatorLenEnd"][i]}</th>
+          <th>${searchData["ActuatorLenInit"][i].toFixed(3)}</th>
+          <th>${searchData["Stroke"][i].toFixed(3)}</th>
+          <th>${searchData["Force[N]"][i].toFixed(2)}</th>
+          <th>${searchData["A2X"][i].toFixed(3)}</th>
+          <th>${searchData["A2Y"][i].toFixed(3)}</th>
+          <th>${searchData["A1X"][i].toFixed(3)}</th>
+          <th>${searchData["A1Y"][i].toFixed(3)}</th>
+          <th>${searchData["ActuatorLenEnd"][i].toFixed(3)}</th>
           </tr>`
       }
-
     })
-
 
 </script>
 {% endblock content %}

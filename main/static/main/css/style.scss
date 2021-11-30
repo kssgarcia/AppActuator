@@ -329,20 +329,23 @@ form {
 
 
 .home .container-table {
-  positon: fixed;
-  width: 40vw;
-  height:80vh;
-  top: 3em;
-  left: 25vw;
+  position: fixed;
+  display: flex;
+  align-items: start;
+  width: 80em;
+  height:80em;
+  top: 7em;
+  left: 50vw;
+  z-index: -700;
   overflow: auto;
   #table-result {
-    position: fixed; 
     background: rgba(0, 0, 0, 0.8);
-    top: 3em;
-    left: 25vw;
-    z-index: -700;
     color: white;
     font-size: 1em;
+    tr {
+      padding: 2em;
+      margin-left: 1em;
+    }
   }
 }
 
