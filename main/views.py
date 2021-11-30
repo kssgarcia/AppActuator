@@ -7,16 +7,10 @@ from json import dumps
 
 def Home(request):
     dataActuatorJson = None
-    dataActuator = {
-            'dataXYOption': [],
-            'mapData': [],
-            'dataEfficiency': [],
-            'dataSearh': []
-            }
+    dataActuator = {}
     if request.method == 'POST':
         form = ActuatorForms(request.POST)
         if form.is_valid():
-            print("The forms send correctly")
             values = list(form.cleaned_data.values())
             # Actuator call 
             actuator = kv.Actuator(*values[0:11])
@@ -24,17 +18,12 @@ def Home(request):
             dataActuator['mapData'] = actuator.Mapped()
             dataActuator['dataEfficiency'] = actuator.Efficiency(0.3)
             dataActuator['dataSearch'] = actuator.SearchResult()
-            dataActuatorJson = dumps(dataActuator)
-
     else:
         form = ActuatorForms()   
+
+    dataActuatorJson = dumps(dataActuator)
     context = {'form': form, 'data': dataActuatorJson}
     return render(request, 'main/home.html', context)
-
-def HomeResult(request, data):
-    data = dumps(data)
-    return render(request, 'main/home.html', data)
-
 
 def cleanLim(lim):
     character = ["[", "]"]

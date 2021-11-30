@@ -306,6 +306,32 @@ form {
   -webkit-transition: background-color 1s, color 1.5s;
 }
 
+/* Result */
+/*  Test for input result */
+#result {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+}
+
+.home .container-table {
+  positon: fixed;
+  width: 40vw;
+  height: 80vh;
+  top: 3em;
+  left: 25vw;
+  overflow: auto;
+}
+.home .container-table #table-result {
+  position: fixed;
+  background: rgba(0, 0, 0, 0.8);
+  top: 3em;
+  left: 25vw;
+  z-index: -700;
+  color: white;
+  font-size: 1em;
+}
+
 /* Exit button */
 .home .container .exit {
   position: absolute;

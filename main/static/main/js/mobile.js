@@ -15,7 +15,6 @@ class Mobile {
       gsap.to(button, {duration: 0.8, opacity: 1})
       gsap.to(inputs, {left: '-30em', duration: 1})
     })
-    console.log("hola")
   }
 }
 
