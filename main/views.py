@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import ActuatorForms 
+from .forms import ActuatorFormsTest 
 import KevinModule as kv
 from json import dumps
 
@@ -9,7 +9,7 @@ def Home(request):
     dataActuatorJson = None
     dataActuator = {}
     if request.method == 'POST':
-        form = ActuatorForms(request.POST)
+        form = ActuatorFormsTest(request.POST)
         if form.is_valid():
             values = list(form.cleaned_data.values())
             # Actuator call 
@@ -19,7 +19,7 @@ def Home(request):
             dataActuator['dataEfficiency'] = actuator.Efficiency(0.3)
             dataActuator['dataSearch'] = actuator.SearchResult()
     else:
-        form = ActuatorForms()   
+        form = ActuatorFormsTest()   
 
     dataActuatorJson = dumps(dataActuator)
     context = {'form': form, 'data': dataActuatorJson}

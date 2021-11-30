@@ -1,4 +1,5 @@
 from django import forms
+from .models import ActuatorModels
 
 class ActuatorForms(forms.Form):
     height = forms.FloatField(widget=forms.NumberInput(attrs={ 'placeholder': 'H', 'class': 'constructor-inputs'}), initial=0.278)
@@ -18,3 +19,9 @@ class ActuatorForms(forms.Form):
     limXA2 = forms.CharField(widget=forms.TextInput(attrs={ 'placeholder': 'limXA2', 'class': 'search-inputs'}), initial=[0.2, 0.5])
     limYA2 = forms.CharField(widget=forms.TextInput(attrs={ 'placeholder': 'limYA2', 'class': 'search-inputs'}), initial=[0.062, 0.062])
     stepA2 = forms.FloatField(widget=forms.NumberInput(attrs={ 'placeholder': 'StepA2', 'class': 'search-inputs'}), initial=0.01)
+
+class ActuatorFormsTest(forms.ModelForm):
+    class Meta:
+        model = ActuatorModels
+        fields = '__all__'
+
