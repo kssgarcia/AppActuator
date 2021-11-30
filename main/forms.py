@@ -18,3 +18,5 @@ class ActuatorForms(forms.Form):
     limXA2 = forms.CharField(widget=forms.TextInput(attrs={ 'placeholder': 'limXA2', 'class': 'search-inputs'}), initial=[0.2, 0.5])
     limYA2 = forms.CharField(widget=forms.TextInput(attrs={ 'placeholder': 'limYA2', 'class': 'search-inputs'}), initial=[0.062, 0.062])
     stepA2 = forms.FloatField(widget=forms.NumberInput(attrs={ 'placeholder': 'StepA2', 'class': 'search-inputs'}), initial=0.01)
+
+
