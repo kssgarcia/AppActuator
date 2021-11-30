@@ -1,7 +1,7 @@
 from django import forms
 from .models import ActuatorModels
 
-class ActuatorForms(forms.Form):
+class ActuatorForms(forms.ModelForm):
     height = forms.FloatField(widget=forms.NumberInput(attrs={ 'placeholder': 'H', 'class': 'constructor-inputs'}), initial=0.278)
     force = forms.FloatField(widget=forms.NumberInput(attrs={ 'placeholder': 'F', 'class': 'constructor-inputs'}), initial=10000.0)
     stroke = forms.FloatField(widget=forms.NumberInput(attrs={ 'placeholder': 'L', 'class': 'constructor-inputs'}), initial=0.45)
@@ -9,7 +9,7 @@ class ActuatorForms(forms.Form):
     angleSimul = forms.FloatField(widget=forms.NumberInput(attrs={ 'placeholder': 'Max Angle', 'class': 'constructor-inputs'}), initial=135)
     direction = forms.IntegerField(widget=forms.NumberInput(attrs={ 'placeholder': 'Direction', 'class': 'constructor-inputs'}), initial=-1)
     airLoad = forms.FloatField(widget=forms.NumberInput(attrs={ 'placeholder': 'Air Load', 'class': 'constructor-inputs'}), initial=0.4)
-    weight = forms.FloatField(widget=forms.NumberInput(attrs={ 'placeholder': 'Weight', 'class': 'constructor-inputs'}), initial=-4561)
+    weight  = forms.FloatField(widget=forms.NumberInput(attrs={ 'placeholder': 'Weight', 'class': 'constructor-inputs'}), initial=-4561)
     step = forms.FloatField(widget=forms.NumberInput(attrs={ 'placeholder': 'Step', 'class': 'constructor-inputs'}), initial=0.1)
     numGraph = forms.IntegerField(widget=forms.NumberInput(attrs={ 'placeholder': 'Number of Graph', 'class': 'constructor-inputs'}), initial=16)
     tol = forms.FloatField(widget=forms.NumberInput(attrs={ 'placeholder': 'Tolerance', 'class': 'search-inputs'}), initial=0.01)
@@ -19,9 +19,7 @@ class ActuatorForms(forms.Form):
     limXA2 = forms.CharField(widget=forms.TextInput(attrs={ 'placeholder': 'limXA2', 'class': 'search-inputs'}), initial=[0.2, 0.5])
     limYA2 = forms.CharField(widget=forms.TextInput(attrs={ 'placeholder': 'limYA2', 'class': 'search-inputs'}), initial=[0.062, 0.062])
     stepA2 = forms.FloatField(widget=forms.NumberInput(attrs={ 'placeholder': 'StepA2', 'class': 'search-inputs'}), initial=0.01)
-
-class ActuatorFormsTest(forms.ModelForm):
     class Meta:
         model = ActuatorModels
-        fields = '__all__'
+        fields = ['height', 'force', 'stroke', 'minLen', 'angleSimul', 'direction', 'airLoad', 'weight', 'step', 'numGraph', 'tol', 'limXA1', 'limYA1', 'stepA1', 'limXA2', 'limYA2', 'stepA2']
 
