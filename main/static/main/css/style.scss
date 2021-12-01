@@ -1,12 +1,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 @import url("https://fonts.adobe.com/fonts/freight-text");
 
+$background-color: black;
+$secundary-color: rgb(20, 20, 20);
+$table-color-one: white;
+
 *, *::after, *::before {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   -ms-overflow-style: none;
   scrollbar-width: none;
   color: white;
+}
+
+body {
+  background: $background-color;
 }
 
 ::-webkit-scrollbar {
@@ -43,157 +51,26 @@ ul {
   margin: 0;
 }
 
-#loading-screen {
-  position: absolute;
-  z-index: 999;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #000000;
-  opacity: 1;
-  -webkit-transition: 1s opacity;
-  transition: 1s opacity;
-}
+/* Navbar */
 
-#loading-screen.fade-out {
-  opacity: 0;
-  display: none;
-}
-
-#loader {
-  display: block;
-  position: relative;
-  left: 45%;
-  top: 50%;
-  width: 0;
-  height: 3px;
-  background-color: white;
-}
-
-/* Loading Screen */
-
-#loading-screen {
-  position: absolute;
-  z-index: 999;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #000000;
-  opacity: 1;
-  transition: 1s opacity;
-}
-
-#loading-screen.fade-out {
-  opacity: 0;
-  display: none;
-}
-
-#loader {
-  display: block;
-  position: relative;
-  left: 45%;
-  top: 50%;
-  width: 2em;
-  height: 3px;
-  background-color: white;
-  -webkit-animation: infinityAnim 1.5s infinite alternate-reverse;
-  animation: infinityAnim 1.5s infinite alternate-reverse;
-}
-
-@-webkit-keyframes infinityAnim {
-  0%   {
-    -webkit-transform: translate(0, 0);
-    -ms-transform: translate(0, 0);
-    transform: translate(0, 0);
-  }
-  100% {
-    -webkit-transform: translate(40px, 0);
-    -ms-transform: translate(40px, 0);
-    transform: translate(40px, 0);
-  }
-}
-@keyframes infinityAnim {
-  0%   {
-    -webkit-transform: translate(0, 0);
-    -ms-transform: translate(0, 0);
-    transform: translate(0, 0);
-  }
-  100% {
-    -webkit-transform: translate(40px, 0);
-    -ms-transform: translate(40px, 0);
-    transform: translate(40px, 0);
-  }
-}
-
-@media only screen and (min-width: 850px) {
-  #loader {
-    left: 49%;
-  }
-}
-
-/* STYLE WEB PAGE */
 .navbar .container {
-  margin-left: auto;
-  margin-right: auto;
-}
-.navbar nav {
-  margin: 2.5em 5em;
   display: flex;
-  justify-content: space-between;
-  .logo {
-    width: 2.2em;
-    display: flex;
-    a {
-      font-size: 1.5em;
-      color: white;
-      width: .7em;
-      .first, .second {
-        font-size: 0.7em;
-        opacity: 0;
-        transition: opacity .5s;
-        color: white;
-      }
-      transition: width .5s;
-    }
-
-    &:hover .word-1{   
-      width: 3.3em;
-      .first {
-        opacity: 1;
-        transition: opacity .5s ease-out;
-        transition-delay: .3s;
-        pointer-events: none;
-      }  
-      transition: all .3s ease-in-out;
-    }
-    &:hover .word-2{
-      width: 2em;
-      .second {
-        opacity: 1;
-        pointer-events: none;
-        transition: opacity .3s ease-out;
-        transition-delay: .3s;
-      }  
-      transition: all .5s ease-in-out;
-    }
-  }
-  ul {
-    display: grid;
-    grid-template-columns: repeat(4, auto);
-    column-gap: 1em;
-    a {
-      color: white;
-      -webkit-transition: color 0.7s;
-      transition: color 0.7s;
-    }
-    a:hover {
-      color: rgb(151, 151, 151); 
-    }
-  }
+  justify-content: space-around;
 }
 
+#icon-1 {
+  position: fixed;
+  bottom: 2em;
+  right: 1em;
+}
+
+#icon-2 {
+  position: fixed;
+  bottom: 2em;
+  right: 3em;
+}
+
+/* Button inputs mobile */
 .button button {
   position: fixed;
   top: 8em;
@@ -203,7 +80,7 @@ ul {
   font-weight: bold;
   transition: background-color 1s, color 1s;
   -webkit-transition: background-color 1s, color 1s;
-  background-color: black;
+  background-color: $secundary-color;
   border: none;
   border-radius: 0 0.5em 0.5em 0;
   width: 7em;
@@ -211,7 +88,7 @@ ul {
   cursor: pointer;
   &:hover {
     background-color: white;
-    color: black;
+    color: $background-color;
     transition: background-color 1s, color 1.5s;
     -webkit-transition: background-color 1s, color 1.5s;
   }
@@ -233,11 +110,9 @@ form {
   position: fixed;
   width: 23em;
   height: 84vh;
-  background: black;
+  background: $secundary-color;
   border-radius: 0 0.5em 0.5em 0;
   left: -30em;
-  //-webkit-transform: translateX(-100vw);
-  //transform: translateX(-100vw);
   .form-inputs{
     margin: 1.5em 2em;
     width: 8em;
@@ -253,15 +128,17 @@ form {
     grid-auto-flow: column;
     grid-template-rows: repeat(11, 2em);
     column-gap: 20px;
+    row-gap: 1em;
       input[type=number], input[type=text] {
         width: 100%;
-        height: 2em;
-        padding: 0.5em 3em;
+        height: 3em;
+        padding: 1em 3em;
         margin: 1em;
         border: none;
+        border-radius: 0.5em;
         border-color: white; 
         background-color: rgba(255, 255, 255, 0.9);
-        color: black;
+        color: $background-color;
         text-align: center;
         -webkit-transition: 1s border-color, 1s background-color;
         transition: 1s border-color, 1s background-color;
@@ -272,7 +149,7 @@ form {
           outline: none;
           text-align: center;
           color: white;
-          border-color: black;
+          border-color: $background-color;
           -webkit-transition: 1s border-color, 1s background-color;
           transition: 1s border-color, 1s background-color;
         }
@@ -300,8 +177,9 @@ form {
         left: 15em;
         display: block;
         margin: 2em auto;
-        color: black;
+        color: $background-color;
         font-weight: bold;
+        border-radius: 0.5em;
         transition: background-color 1s, color 1s;
         -webkit-transition: background-color 1s, color 1s;
         background-color: white;
@@ -310,7 +188,7 @@ form {
         height: 3.5em;
         cursor: pointer;
         &:hover {
-          background-color: black;
+          background-color: $background-color;
           color: white;
           transition: background-color 1s, color 1.5s;
           -webkit-transition: background-color 1s, color 1.5s;
@@ -335,18 +213,32 @@ form {
   width: 80em;
   height:80em;
   top: 7em;
-  left: 50vw;
+  left: 42em;
   z-index: -700;
   overflow: auto;
   #table-result {
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
+    background: $table-color-one;
     font-size: 1em;
     tr {
       padding: 2em;
       margin-left: 1em;
+      th {
+        color: black;
+      }
     }
   }
+}
+
+.home .container-table::before {
+  content: "";
+  position: fixed;
+  top: 6em;
+  left: 35em;
+  width: 50em;
+  height: 40em; 
+  z-index: -800;
+  border-radius: 2em;
+  background-color: rgba(20, 20, 20, 0.8);
 }
 
 /* Exit button */
@@ -407,6 +299,7 @@ form {
 
       .cform {
         position: static;
+        margin-left: -4em;
         left: 0em;
         background-color: unset;
       }
@@ -423,24 +316,24 @@ form {
         width: 10em;
         input[type=number], input[type=text] {
           border-color: white; 
-          background-color: rgba(0, 0, 0, 0.8);
+          background-color: rgba(20, 20, 20, 0.8);
           color: white;
           &:focus {
             background-color: rgba(87, 86, 86, 0.8);
-            border-color: black;
+            border-color: $background-color;
           }
         }
 
         input[type=submit] {
-          bottom: 2.5em;
-          left: 25em;
+          bottom: 5.4em;
+          left: 23.2em;
           margin: 2em auto;
-          color: black;
+          color: $background-color;
           background-color: white;
           width: 7em;
           height: 3.5em;
           &:hover {
-            background-color: black;
+            background-color: $background-color;
             color: white;
           }
         }

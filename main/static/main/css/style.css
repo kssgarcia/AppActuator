@@ -8,6 +8,10 @@
   color: white;
 }
 
+body {
+  background: black;
+}
+
 ::-webkit-scrollbar {
   display: none;
 }
@@ -41,154 +45,25 @@ ul {
   margin: 0;
 }
 
-#loading-screen {
-  position: absolute;
-  z-index: 999;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #000000;
-  opacity: 1;
-  -webkit-transition: 1s opacity;
-  transition: 1s opacity;
-}
-
-#loading-screen.fade-out {
-  opacity: 0;
-  display: none;
-}
-
-#loader {
-  display: block;
-  position: relative;
-  left: 45%;
-  top: 50%;
-  width: 0;
-  height: 3px;
-  background-color: white;
-}
-
-/* Loading Screen */
-#loading-screen {
-  position: absolute;
-  z-index: 999;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #000000;
-  opacity: 1;
-  transition: 1s opacity;
-}
-
-#loading-screen.fade-out {
-  opacity: 0;
-  display: none;
-}
-
-#loader {
-  display: block;
-  position: relative;
-  left: 45%;
-  top: 50%;
-  width: 2em;
-  height: 3px;
-  background-color: white;
-  -webkit-animation: infinityAnim 1.5s infinite alternate-reverse;
-  animation: infinityAnim 1.5s infinite alternate-reverse;
-}
-
-@-webkit-keyframes infinityAnim {
-  0% {
-    -webkit-transform: translate(0, 0);
-    -ms-transform: translate(0, 0);
-    transform: translate(0, 0);
-  }
-  100% {
-    -webkit-transform: translate(40px, 0);
-    -ms-transform: translate(40px, 0);
-    transform: translate(40px, 0);
-  }
-}
-@keyframes infinityAnim {
-  0% {
-    -webkit-transform: translate(0, 0);
-    -ms-transform: translate(0, 0);
-    transform: translate(0, 0);
-  }
-  100% {
-    -webkit-transform: translate(40px, 0);
-    -ms-transform: translate(40px, 0);
-    transform: translate(40px, 0);
-  }
-}
-@media only screen and (min-width: 850px) {
-  #loader {
-    left: 49%;
-  }
-}
-/* STYLE WEB PAGE */
+/* Navbar */
 .navbar .container {
-  margin-left: auto;
-  margin-right: auto;
+  display: flex;
+  justify-content: space-around;
 }
 
-.navbar nav {
-  margin: 2.5em 5em;
-  display: flex;
-  justify-content: space-between;
-}
-.navbar nav .logo {
-  width: 2.2em;
-  display: flex;
-}
-.navbar nav .logo a {
-  font-size: 1.5em;
-  color: white;
-  width: 0.7em;
-  transition: width 0.5s;
-}
-.navbar nav .logo a .first, .navbar nav .logo a .second {
-  font-size: 0.7em;
-  opacity: 0;
-  transition: opacity 0.5s;
-  color: white;
-}
-.navbar nav .logo:hover .word-1 {
-  width: 3.3em;
-  transition: all 0.3s ease-in-out;
-}
-.navbar nav .logo:hover .word-1 .first {
-  opacity: 1;
-  transition: opacity 0.5s ease-out;
-  transition-delay: 0.3s;
-  pointer-events: none;
-}
-.navbar nav .logo:hover .word-2 {
-  width: 2em;
-  transition: all 0.5s ease-in-out;
-}
-.navbar nav .logo:hover .word-2 .second {
-  opacity: 1;
-  pointer-events: none;
-  transition: opacity 0.3s ease-out;
-  transition-delay: 0.3s;
-}
-.navbar nav ul {
-  display: grid;
-  grid-template-columns: repeat(4, auto);
-  column-gap: 1em;
-}
-.navbar nav ul a {
-  color: white;
-  -webkit-transition: color 0.7s;
-  transition: color 0.7s;
-}
-.navbar nav ul a:hover {
-  color: #979797;
+#icon-1 {
+  position: fixed;
+  bottom: 2em;
+  right: 1em;
 }
 
+#icon-2 {
+  position: fixed;
+  bottom: 2em;
+  right: 3em;
+}
+
+/* Button inputs mobile */
 .button button {
   position: fixed;
   top: 8em;
@@ -198,7 +73,7 @@ ul {
   font-weight: bold;
   transition: background-color 1s, color 1s;
   -webkit-transition: background-color 1s, color 1s;
-  background-color: black;
+  background-color: #141414;
   border: none;
   border-radius: 0 0.5em 0.5em 0;
   width: 7em;
@@ -225,7 +100,7 @@ form {
   position: fixed;
   width: 23em;
   height: 84vh;
-  background: black;
+  background: #141414;
   border-radius: 0 0.5em 0.5em 0;
   left: -30em;
 }
@@ -242,13 +117,15 @@ form {
   grid-auto-flow: column;
   grid-template-rows: repeat(11, 2em);
   column-gap: 20px;
+  row-gap: 1em;
 }
 .home .form-inputs input[type=number], .home .form-inputs input[type=text] {
   width: 100%;
-  height: 2em;
-  padding: 0.5em 3em;
+  height: 3em;
+  padding: 1em 3em;
   margin: 1em;
   border: none;
+  border-radius: 0.5em;
   border-color: white;
   background-color: rgba(255, 255, 255, 0.9);
   color: black;
@@ -291,6 +168,7 @@ form {
   margin: 2em auto;
   color: black;
   font-weight: bold;
+  border-radius: 0.5em;
   transition: background-color 1s, color 1s;
   -webkit-transition: background-color 1s, color 1s;
   background-color: white;
@@ -321,18 +199,32 @@ form {
   width: 80em;
   height: 80em;
   top: 7em;
-  left: 50vw;
+  left: 42em;
   z-index: -700;
   overflow: auto;
 }
 .home .container-table #table-result {
-  background: rgba(0, 0, 0, 0.8);
-  color: white;
+  background: white;
   font-size: 1em;
 }
 .home .container-table #table-result tr {
   padding: 2em;
   margin-left: 1em;
+}
+.home .container-table #table-result tr th {
+  color: black;
+}
+
+.home .container-table::before {
+  content: "";
+  position: fixed;
+  top: 6em;
+  left: 35em;
+  width: 50em;
+  height: 40em;
+  z-index: -800;
+  border-radius: 2em;
+  background-color: rgba(20, 20, 20, 0.8);
 }
 
 /* Exit button */
@@ -391,6 +283,7 @@ form {
   }
   .home .container .cform {
     position: static;
+    margin-left: -4em;
     left: 0em;
     background-color: unset;
   }
@@ -406,7 +299,7 @@ form {
   }
   .home .container .form-inputs input[type=number], .home .container .form-inputs input[type=text] {
     border-color: white;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(20, 20, 20, 0.8);
     color: white;
   }
   .home .container .form-inputs input[type=number]:focus, .home .container .form-inputs input[type=text]:focus {
@@ -414,8 +307,8 @@ form {
     border-color: black;
   }
   .home .container .form-inputs input[type=submit] {
-    bottom: 2.5em;
-    left: 25em;
+    bottom: 5.4em;
+    left: 23.2em;
     margin: 2em auto;
     color: black;
     background-color: white;

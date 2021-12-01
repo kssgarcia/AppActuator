@@ -37,19 +37,36 @@
 <canvas class="webgl"></canvas>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
-<script src="{% static 'main/js/bundle.js' %}"></script>
 <script src="{% static 'main/js/mobile.js' %}"></script>
 <script>
 
+
   console.log("asdasdasdasd")
+  let result = document.getElementById("table-result")
 
   $('#event').submit(function(e){
       e.preventDefault();
       console.log("holaaaaaa")
-      url = $(this).attr('action')
+      url = ''
       data = $(this).serialize()
+      let dataGet = JSON.parse("{{data|escapejs}}")
+      console.log(dataGet)
       $.post(url, data, function(response){
-          console.log("here")
+          const searchData = dataGet.dataSearch
+          for (let i=0; i<searchData.Count.length; i++ )
+          {
+              result.innerHTML += `<tr>
+ <th>${searchData["Count"][i]}</th>
+ <th>${searchData["ActuatorLenInit"][i].toFixed(3)}</th>
+ <th>${searchData["Stroke"][i].toFixed(3)}</th>
+ <th>${searchData["Force[N]"][i].toFixed(2)}</th>
+ <th>${searchData["A2X"][i].toFixed(3)}</th>
+ <th>${searchData["A2Y"][i].toFixed(3)}</th>
+ <th>${searchData["A1X"][i].toFixed(3)}</th>
+ <th>${searchData["A1Y"][i].toFixed(3)}</th>
+ <th>${searchData["ActuatorLenEnd"][i].toFixed(3)}</th>
+ </tr>`
+            }
         })
     })
 

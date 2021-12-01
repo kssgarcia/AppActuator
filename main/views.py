@@ -6,10 +6,11 @@ from json import dumps
 # Create your views here.
 
 def Home(request):
-    dataActuatorJson = None
+    dataActuatorJson = []
     dataActuator = {}
     if request.method == 'POST':
         form = ActuatorForms(request.POST)
+        print("+++++++++++++++++++++++++++++++++++++++++++++++++++")
         if form.is_valid():
             form.save()
             values = list(form.cleaned_data.values())
@@ -19,10 +20,11 @@ def Home(request):
             dataActuator['mapData'] = actuator.Mapped()
             dataActuator['dataEfficiency'] = actuator.Efficiency(0.3)
             dataActuator['dataSearch'] = actuator.SearchResult()
+            dataActuatorJson.append(dumps(dataActuator))
+
     else:
         form = ActuatorForms()   
 
-    dataActuatorJson = dumps(dataActuator)
     context = {'form': form, 'data': dataActuatorJson}
     return render(request, 'main/home.html', context)
 
