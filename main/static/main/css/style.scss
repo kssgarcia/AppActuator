@@ -198,27 +198,21 @@ form {
 }
 
 /* Result */
-/*  Test for input result */ 
-#result {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-}
-
 
 .home .container-table {
-  position: fixed;
   display: flex;
   align-items: start;
-  width: 80em;
-  height:80em;
+  justify-content: center;
+  margin-top: 1em;
   top: 7em;
   left: 42em;
-  z-index: -700;
+  height: 90%;
+  z-index: 0;
   overflow: auto;
   #table-result {
+    width: 87%;
     background: $table-color-one;
-    font-size: 1em;
+    font-size: 0.8em;
     tr {
       padding: 2em;
       margin-left: 1em;
@@ -231,13 +225,13 @@ form {
 
 .home .container-table::before {
   content: "";
-  position: fixed;
-  top: 6em;
-  left: 35em;
-  width: 50em;
-  height: 40em; 
+  position: absolute;
+  top: 10vh;
+  right: 5vw;
+  width: 90vw;
+  height: 80vh; 
   z-index: -800;
-  border-radius: 2em;
+  border-radius: 1em;
   background-color: rgba(20, 20, 20, 0.8);
 }
 
@@ -281,7 +275,7 @@ form {
   }
 }
 
-@media only screen and (min-width: 800px) {
+@media only screen and (min-width: 1200px) {
   body {
     overflow-y: hidden;
   }
@@ -291,11 +285,15 @@ form {
   }
 
   .home {
+    display: grid;
+    grid-template-columns: 30vw 70vw;
     width: 100vw;
     height: 100vh;
     .container {
+      display: grid;
+      justify-content: center;
       margin: 0 auto;
-      width: 90%;
+      width: 100%;
 
       .cform {
         position: static;
@@ -339,6 +337,22 @@ form {
         }
       }
     }
+  }
+
+  .home .container-table {
+    display: grid;
+    justify-content: center;
+    margin-top: 3em;
+    height: 60em;
+
+    #table-result {
+      width: 60vw;
+    }
+  }
+
+  .home .container-table::before {
+    width: 65vw;
+    right: 2em;
   }
 }
 
