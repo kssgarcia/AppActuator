@@ -3,7 +3,7 @@
 
 $background-color: black;
 $secundary-color: rgb(20, 20, 20);
-$table-color-one: white;
+$table-color-one: orange;
 
 *, *::after, *::before {
   -webkit-box-sizing: border-box;
@@ -210,19 +210,44 @@ form {
   z-index: 0;
   overflow: auto;
   #table-result {
+    font-family: sans-serif;
     width: 87%;
-    background: $table-color-one;
-    font-size: 0.8em;
-    tr {
-      padding: 2em;
-      margin-left: 1em;
+    font-size: 0.7em;
+    border-collapse: collapse;
+    margin: 0 0 25px;
+    min-width: 100px;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden; 
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
+    thead tr {
+      background-color: $table-color-one;
+      text-align: center;
+      font-weight: bold; 
+
       th {
         color: black;
       }
     }
+
+    th, td {
+      padding: 12px 1px;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid #dddddd;
+    }
+
+    tbody tr:nth-of-type(even) {
+      background-color: #f3f3f3;
+    }
+
+    tbody tr:last-of-type {
+      border-bottom: 2px solid #009879;
+    }
+
   }
 }
-
 .home .container-table::before {
   content: "";
   position: absolute;
@@ -342,11 +367,16 @@ form {
   .home .container-table {
     display: grid;
     justify-content: center;
-    margin-top: 3em;
+    margin-top: 2em;
     height: 60em;
 
     #table-result {
       width: 60vw;
+      font-size: 0.9em;
+
+      th, td {
+        padding: 12px 15px;
+      }
     }
   }
 

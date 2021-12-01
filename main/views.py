@@ -3,6 +3,9 @@ from .forms import ActuatorForms
 import KevinModule as kv
 from json import dumps
 
+
+import random
+
 # Create your views here.
 
 def Home(request):
@@ -10,7 +13,6 @@ def Home(request):
     dataActuator = {}
     if request.method == 'POST':
         form = ActuatorForms(request.POST)
-        print("+++++++++++++++++++++++++++++++++++++++++++++++++++")
         if form.is_valid():
             form.save()
             values = list(form.cleaned_data.values())
@@ -19,8 +21,9 @@ def Home(request):
             dataActuator['dataXYOption'] = actuator.SearchPosition(list(cleanLim(values[11])), list(cleanLim(values[12])), values[13], list(cleanLim(values[14])), list(cleanLim(values[15])), values[16])
             dataActuator['mapData'] = actuator.Mapped()
             dataActuator['dataEfficiency'] = actuator.Efficiency(0.3)
-            dataActuator['dataSearch'] = actuator.SearchResult()
+            dataActuator['dataSearch'] = CreateList()
             dataActuatorJson.append(dumps(dataActuator))
+            #dataActuator['dataSearch'] = actuator.SearchResult()
 
     else:
         form = ActuatorForms()   
@@ -33,6 +36,18 @@ def cleanLim(lim):
     for char in character:
         lim = lim.strip(char)
     return map(float, lim.split(","))
+
+def CreateList():
+    listFill = {"Count": [], "ActuatorLenInit": [], "Stroke": [], "Force[N]": [], "A2X": [], "A2Y": [], "A1X": [], "A1Y": [], "ActuatorLenEnd": []}
+    listNumber = [i*random.randint(1,10) for i in range(1, 20)]
+
+    for i in listFill.keys():
+        listFill[i] = listNumber
+
+    return listFill
+
+
+
 
 
 # 0.278, 10000.0, 0.45, 0.520, 135.0, -1, 0.4, -4561.65, 0.1, 16, 0.01
