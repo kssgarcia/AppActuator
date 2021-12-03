@@ -56,6 +56,7 @@
       <canvas id="my-load"></canvas>
     </div>
   </div>
+
 </section>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
@@ -66,13 +67,9 @@
 <script>
 
   const submitBtn = document.querySelector(".home .container .cform .button-submit")
-  let data = "{{data|escapejs}}"
-  if (data.length >= 7) 
-  {
-      displayResult()
-  }
-  function displayResult () {
+  submitBtn.addEventListener('click', (event) => {
       //event.preventDefault()
+      let data = "{{data|escapejs}}"
       let dataFil = data.substr(1, data.length-1)
       let dataFil2 = dataFil.substr(1, dataFil.length-3)
 
@@ -170,6 +167,6 @@
             }
         )
 
-    }
+    })
 </script>
 {% endblock content %}

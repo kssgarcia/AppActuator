@@ -21,34 +21,21 @@ def Home(request):
             dataActuator['dataXYOption'] = actuator.SearchPosition(list(cleanLim(values[11])), list(cleanLim(values[12])), values[13], list(cleanLim(values[14])), list(cleanLim(values[15])), values[16])
             dataActuator['mapData'] = actuator.Mapped()
             dataActuator['dataEfficiency'] = actuator.Efficiency(0.3)
-            dataActuator['dataSearch'] = CreateList()
-            dataActuatorJson.append(dumps(dataActuator))
-            #dataActuator['dataSearch'] = actuator.SearchResult()
+            dataActuator['dataSearch'] = actuator.SearchResult()
 
     else:
         form = ActuatorForms()   
 
+    dataActuatorJson.append(dumps(dataActuator))
     context = {'form': form, 'data': dataActuatorJson}
     return render(request, 'main/home.html', context)
+
 
 def cleanLim(lim):
     character = ["[", "]"]
     for char in character:
         lim = lim.strip(char)
     return map(float, lim.split(","))
-
-def CreateList():
-    listFill = {"Count": [], "ActuatorLenInit": [], "Stroke": [], "Force[N]": [], "A2X": [], "A2Y": [], "A1X": [], "A1Y": [], "ActuatorLenEnd": []}
-    listNumber = [i*random.randint(1,10) for i in range(1, 20)]
-
-    for i in listFill.keys():
-        listFill[i] = listNumber
-
-    return listFill
-
-
-
-
 
 # 0.278, 10000.0, 0.45, 0.520, 135.0, -1, 0.4, -4561.65, 0.1, 16, 0.01
 # [-0.5, -0.05], [-1.5, -0.1], 0.01 , [0.2, 0.5], [0.062, 0.062], 0.01
