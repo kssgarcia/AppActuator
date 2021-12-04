@@ -10,7 +10,7 @@
       <form class="form-inputs" id="event" method="post">
         {% csrf_token %}
         {{ form }}
-        <input type="submit" value="Submit" class="button-submit">
+        <input type="submit" value="Submit" class="button-submit" id="submitBtn">
       </form>   
       <div class="exit">
         <div class="line-1"></div>
@@ -25,6 +25,7 @@
       <button class="windowBtn-2">mapGraph</button>
       <button class="windowBtn-3">Efficiency</button>
       <button class="windowBtn-4">Load</button>
+      <button class="windowBtn-5">Info</button>
     </div>
 
     <div class="container-table window-1">
@@ -55,6 +56,10 @@
     <div class="container-load window-4">
       <canvas id="my-load"></canvas>
     </div>
+
+    <div class="container-info window-5">
+      <canvas id="my-info"></canvas>
+    </div>
   </div>
 </section>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
@@ -62,7 +67,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.1/chart.min.js" integrity="sha512-O2fWHvFel3xjQSi9FyzKXWLTvnom+lOYR/AUEThL/fbP4hv1Lo5LCFCGuTXBRyKC4K4DJldg5kxptkgXAzUpvA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="{% static 'main/js/mobile.js' %}"></script>
 <script src="{% static 'main/js/tabs.js' %}"></script>
-
+<script src="{% static 'main/js/tableSort.js' %}"></script>
+<script src="{% static 'main/js/numGraph.js' %}"></script>
 <script>
 
   const submitBtn = document.querySelector(".home .container .cform .button-submit")
@@ -77,7 +83,6 @@
       let dataFil2 = dataFil.substr(1, dataFil.length-3)
 
       const dat = JSON.parse(dataFil2)
-      console.log(dat)
 
       // Display Table
       let resultTable = document.querySelector("#table-result tbody")
@@ -89,10 +94,10 @@
  <td>${searchData["ActuatorLenInit"][i].toFixed(3)}</td>
  <td>${searchData["Stroke"][i].toFixed(3)}</td>
  <td>${searchData["Force[N]"][i].toFixed(2)}</td>
- <th>${searchData["A2X"][i].toFixed(3)}</td>
+ <td>${searchData["A2X"][i].toFixed(3)}</td>
  <td>${searchData["A2Y"][i].toFixed(3)}</td>
  <td>${searchData["A1X"][i].toFixed(3)}</td>
- <th>${searchData["A1Y"][i].toFixed(3)}</td>
+ <td>${searchData["A1Y"][i].toFixed(3)}</td>
  <td>${searchData["ActuatorLenEnd"][i].toFixed(3)}</td>
  </tr>`
         }

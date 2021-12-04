@@ -131,7 +131,7 @@ form {
     display: grid; 
     grid-template-columns: repeat(2, 7em);
     grid-auto-flow: column;
-    grid-template-rows: repeat(11, 2em);
+    grid-template-rows: repeat(10, 2em);
     column-gap: 20px;
     row-gap: 1em;
       input[type=number], input[type=text] {
@@ -202,6 +202,13 @@ form {
     }
 }
 
+#number-graph {
+  grid-column: 2 / span 1;
+  grid-row: 10 / span 1;
+}
+
+
+
 /* Result */
 
 .home .container-table {
@@ -248,6 +255,18 @@ form {
       border-bottom: 2px solid $table-color-one;
     }
 
+    tbody tr {
+      cursor: pointer;
+      transition: color 0.4s;
+
+      &:hover {
+        td {
+          color: rgba(200, 200, 200, 0.4);
+          transition: color 0.4s;
+        }
+      }
+    }
+
   }
 }
 
@@ -262,6 +281,35 @@ form {
   border-radius: 1em;
   background-color: rgb(20, 20, 20);
 }
+
+/* Sort table */
+
+.home .container-table #table-result { 
+  th { 
+    cursor: pointer;
+
+  }
+  .th-srt-asc, .th-srt-desc {
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  .th-srt-asc::after {
+    content: "\25b4";
+    & {
+      margin-left: 5px;
+    }
+  }
+
+  .th-srt-desc::after {
+    content: "\25be";
+    & {
+      margin-left: 5px;
+    }
+  }
+
+}
+
+
 
 /* Exit button */
 
@@ -309,7 +357,7 @@ form {
 .ui-results .container-tabs {
   position: fixed;
   display: grid;
-  grid-template-columns: repeat(4, 4.5em);
+  grid-template-columns: repeat(5, 4.5em);
   grid-template-rows: 2em;
   row-gap: 0.5em;
   top: 6.5vh;
@@ -372,7 +420,7 @@ form {
       .form-inputs {
         display: grid;
         grid-template-columns: repeat(2, 10em);
-        grid-template-rows: repeat(11, 2em);
+        grid-template-rows: repeat(10, 2em);
         column-gap: 20px;
         width: 10em;
         input[type=number], input[type=text] {
@@ -423,7 +471,7 @@ form {
   }
 
   .ui-results .container-tabs {
-    grid-template-columns: repeat(4, 5em);
+    grid-template-columns: repeat(5, 5em);
     grid-gap: 0.2em;
     top: 5.2vh;
     left: 35vw;
@@ -469,9 +517,18 @@ form {
     width: 75em;
     height: 45em;
   }
+  .container-info {
+    display: none;
+    padding-top: 3em;
+    margin: auto;
+    width: 75em;
+    height: 45em;
+
+  }
 
   .show {
     display: flex;
   }
 
 } 
+

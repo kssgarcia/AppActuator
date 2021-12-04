@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 @import url("https://fonts.adobe.com/fonts/freight-text");
 *, *::after, *::before {
@@ -118,7 +119,7 @@ form {
   display: grid;
   grid-template-columns: repeat(2, 7em);
   grid-auto-flow: column;
-  grid-template-rows: repeat(11, 2em);
+  grid-template-rows: repeat(10, 2em);
   column-gap: 20px;
   row-gap: 1em;
 }
@@ -187,6 +188,11 @@ form {
   -webkit-transition: background-color 1s, color 1.5s;
 }
 
+#number-graph {
+  grid-column: 2/span 1;
+  grid-row: 10/span 1;
+}
+
 /* Result */
 .home .container-table {
   display: flex;
@@ -228,6 +234,14 @@ form {
 .home .container-table #table-result tbody tr:last-of-type {
   border-bottom: 2px solid orange;
 }
+.home .container-table #table-result tbody tr {
+  cursor: pointer;
+  transition: color 0.4s;
+}
+.home .container-table #table-result tbody tr:hover td {
+  color: rgba(200, 200, 200, 0.4);
+  transition: color 0.4s;
+}
 
 .home::before {
   content: "";
@@ -239,6 +253,26 @@ form {
   z-index: -800;
   border-radius: 1em;
   background-color: #141414;
+}
+
+/* Sort table */
+.home .container-table #table-result th {
+  cursor: pointer;
+}
+.home .container-table #table-result .th-srt-asc, .home .container-table #table-result .th-srt-desc {
+  background: rgba(0, 0, 0, 0.1);
+}
+.home .container-table #table-result .th-srt-asc::after {
+  content: "▴";
+}
+.home .container-table #table-result .th-srt-asc::after {
+  margin-left: 5px;
+}
+.home .container-table #table-result .th-srt-desc::after {
+  content: "▾";
+}
+.home .container-table #table-result .th-srt-desc::after {
+  margin-left: 5px;
 }
 
 /* Exit button */
@@ -282,7 +316,7 @@ form {
 .ui-results .container-tabs {
   position: fixed;
   display: grid;
-  grid-template-columns: repeat(4, 4.5em);
+  grid-template-columns: repeat(5, 4.5em);
   grid-template-rows: 2em;
   row-gap: 0.5em;
   top: 6.5vh;
@@ -342,7 +376,7 @@ form {
   .home .container .form-inputs {
     display: grid;
     grid-template-columns: repeat(2, 10em);
-    grid-template-rows: repeat(11, 2em);
+    grid-template-rows: repeat(10, 2em);
     column-gap: 20px;
     width: 10em;
   }
@@ -388,7 +422,7 @@ form {
   }
 
   .ui-results .container-tabs {
-    grid-template-columns: repeat(4, 5em);
+    grid-template-columns: repeat(5, 5em);
     grid-gap: 0.2em;
     top: 5.2vh;
     left: 35vw;
@@ -422,6 +456,13 @@ form {
   height: 45em;
 }
 .ui-results .container-load {
+  display: none;
+  padding-top: 3em;
+  margin: auto;
+  width: 75em;
+  height: 45em;
+}
+.ui-results .container-info {
   display: none;
   padding-top: 3em;
   margin: auto;
