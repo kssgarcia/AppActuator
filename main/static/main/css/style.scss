@@ -1,3 +1,18 @@
+/* Login */
+@use "components/login";
+
+/* Register */
+@use "components/register";
+
+/* List */
+@use "components/list";
+
+/* Detail */
+@use "components/detail";
+
+/* Detail */
+@use "components/create";
+
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 @import url("https://fonts.adobe.com/fonts/freight-text");
 
@@ -56,6 +71,7 @@ ul {
 .navbar .container {
   display: flex;
   justify-content: start;
+  margin-bottom: 1em;
 
   h1 {
     margin-left: 7vw;
@@ -73,6 +89,22 @@ ul {
   position: fixed;
   bottom: 2em;
   right: 4em;
+}
+
+#login-btn {
+  position: fixed;
+  top: 2.5em;
+  right: 12em;
+  padding: 0.7em 1em;
+  border-radius: 0.2em;
+  font-weight: bold;
+  background: #FFA500;
+  color: black;
+  transition: background 0.5s;
+  &:hover {
+    transition: background 0.5s;
+    background: #ff9500;
+  }
 }
 
 #register-btn {
@@ -117,11 +149,6 @@ ul {
 }  
 
 .home .button-none {
-  display: none;
-}
-
-
-form {
   display: none;
 }
 
@@ -325,8 +352,6 @@ form {
 
 }
 
-
-
 /* Exit button */
 
 .home .container {
@@ -449,6 +474,7 @@ form {
     }
   }
 }
+
 
 
 @media only screen and (min-width: 1200px) {

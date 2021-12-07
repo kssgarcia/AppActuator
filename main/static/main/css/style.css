@@ -1,6 +1,287 @@
 @charset "UTF-8";
+/* Login */
+/* Register */
+/* List */
+/* Detail */
+/* Detail */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 @import url("https://fonts.adobe.com/fonts/freight-text");
+.login {
+  width: 100vw;
+  height: 100vh;
+}
+.login .container {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  align-items: center;
+}
+.login .container .lform {
+  width: 40%;
+  height: 60%;
+  margin: 9em auto auto;
+  background: white;
+  border-radius: 1em;
+  display: flex;
+  justify-content: center;
+}
+.login .container .lform form {
+  height: 70%;
+  display: grid;
+  grid-template-columns: 30em;
+  align-self: center;
+  row-gap: 2em;
+}
+.login .container .lform form label {
+  color: black;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+.login .container .lform form input[type=text], .login .container .lform form input[type=password] {
+  width: 90%;
+  height: 4em;
+  padding: 1em 3em;
+  margin: 1em;
+  border: none;
+  border-radius: 0.5em;
+  border-color: white;
+  background-color: rgba(200, 200, 200, 0.9);
+  color: black;
+  text-align: center;
+  -webkit-transition: 1s border-color, 1s background-color;
+  transition: 1s border-color, 1s background-color;
+}
+.login .container .lform form input[type=text]:focus, .login .container .lform form input[type=password]:focus {
+  background-color: rgba(87, 86, 86, 0.8);
+  box-shadow: none;
+  border: none;
+  outline: none;
+  text-align: center;
+  color: white;
+  border-color: black;
+  -webkit-transition: 1s border-color, 1s background-color;
+  transition: 1s border-color, 1s background-color;
+}
+.login .container .lform form input[type=text]::placeholder, .login .container .lform form input[type=password]::placeholder {
+  -webkit-transition: 0.7s color;
+  transition: 0.7s color;
+  color: grey;
+}
+.login .container .lform form input[type=text]:hover::placeholder, .login .container .lform form input[type=password]:hover::placeholder {
+  color: white;
+}
+
+.register {
+  width: 100vw;
+  height: 100vh;
+}
+.register .container {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  align-items: center;
+}
+.register .container .rform {
+  width: 40%;
+  height: 60%;
+  margin: 9em auto auto;
+  background: white;
+  border-radius: 1em;
+  display: flex;
+  justify-content: center;
+}
+.register .container .rform form {
+  height: 70%;
+  display: grid;
+  grid-template-columns: 30em;
+  align-self: center;
+  row-gap: 2em;
+}
+.register .container .rform form label {
+  color: black;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+.register .container .rform form input[type=text] {
+  width: 90%;
+  height: 4em;
+  padding: 1em 3em;
+  margin: 1em;
+  border: none;
+  border-radius: 0.5em;
+  border-color: white;
+  background-color: rgba(200, 200, 200, 0.9);
+  color: black;
+  text-align: center;
+  -webkit-transition: 1s border-color, 1s background-color;
+  transition: 1s border-color, 1s background-color;
+}
+.register .container .rform form input[type=text]:focus {
+  background-color: rgba(87, 86, 86, 0.8);
+  box-shadow: none;
+  border: none;
+  outline: none;
+  text-align: center;
+  color: white;
+  border-color: black;
+  -webkit-transition: 1s border-color, 1s background-color;
+  transition: 1s border-color, 1s background-color;
+}
+.register .container .rform form input[type=text]::placeholder {
+  -webkit-transition: 0.7s color;
+  transition: 0.7s color;
+  color: grey;
+}
+.register .container .rform form input[type=text]:hover::placeholder {
+  color: white;
+}
+
+.list {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  align-items: center;
+}
+.list a {
+  color: black;
+  text-decoration: underline;
+}
+.list .container {
+  width: 20%;
+  height: 50%;
+  margin: auto;
+  border-radius: 1em;
+  background-color: white;
+}
+.list .container .add-profile {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+.list .container .add-profile a {
+  margin-top: 2em;
+  text-decoration: none;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: orange;
+}
+.list .container table {
+  padding: 3em;
+}
+.list .container table thead tr th {
+  font-size: 2em;
+  font-weight: bold;
+  color: black;
+}
+.list .container table tbody td {
+  color: black;
+  font-size: 1.5em;
+}
+
+.detail {
+  width: 100vw;
+  height: 100vh;
+}
+.detail .container {
+  width: 50%;
+  height: 50%;
+  margin: auto;
+}
+
+/* Form */
+.create .container .create-form {
+  width: 23em;
+  height: 84vh;
+  border-radius: 0 0.5em 0.5em 0;
+}
+.create .container .create-form .form-inputs {
+  margin: 1.5em 2em;
+  width: 8em;
+  display: grid;
+  grid-template-columns: 1;
+}
+
+.create .container {
+  display: grid;
+}
+.create .form-inputs-create {
+  display: grid;
+  grid-template-columns: repeat(2, 7em);
+  grid-auto-flow: column;
+  grid-template-rows: repeat(10, 2em);
+  column-gap: 20px;
+  row-gap: 1em;
+}
+.create .form-inputs-create input[type=number], .create .form-inputs-create input[type=text] {
+  width: 100%;
+  height: 3em;
+  padding: 1em 3em;
+  margin: 1em;
+  border: none;
+  border-radius: 0.5em;
+  border-color: white;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: black;
+  text-align: center;
+  -webkit-transition: 1s border-color, 1s background-color;
+  transition: 1s border-color, 1s background-color;
+}
+.create .form-inputs-create input[type=number]:focus, .create .form-inputs-create input[type=text]:focus {
+  background-color: rgba(87, 86, 86, 0.8);
+  box-shadow: none;
+  border: none;
+  outline: none;
+  text-align: center;
+  color: white;
+  border-color: black;
+  -webkit-transition: 1s border-color, 1s background-color;
+  transition: 1s border-color, 1s background-color;
+}
+.create .form-inputs-create input[type=number]::placeholder, .create .form-inputs-create input[type=text]::placeholder {
+  -webkit-transition: 0.7s color;
+  transition: 0.7s color;
+}
+.create .form-inputs-create input[type=number]:hover::placeholder, .create .form-inputs-create input[type=text]:hover::placeholder {
+  color: white;
+}
+.create .form-inputs-create label {
+  width: 8em;
+  display: none;
+}
+.create .form-inputs-create input[type=number]::-webkit-inner-spin-button,
+.create .form-inputs-create input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.create .form-inputs-create input[type=submit] {
+  position: absolute;
+  bottom: 0;
+  left: 15em;
+  display: block;
+  margin: 2em auto;
+  color: black;
+  font-weight: bold;
+  border-radius: 0.5em;
+  transition: background-color 1s, color 1s;
+  -webkit-transition: background-color 1s, color 1s;
+  background-color: white;
+  border: none;
+  width: 7em;
+  height: 3.5em;
+  cursor: pointer;
+}
+.create .form-inputs-create input[type=submit]:hover {
+  background-color: black;
+  color: white;
+  transition: background-color 1s, color 1.5s;
+  -webkit-transition: background-color 1s, color 1.5s;
+}
+
+#number-graph-create {
+  grid-column: 2/span 1;
+  grid-row: 10/span 1;
+}
+
 *, *::after, *::before {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -50,6 +331,7 @@ ul {
 .navbar .container {
   display: flex;
   justify-content: start;
+  margin-bottom: 1em;
 }
 .navbar .container h1 {
   margin-left: 7vw;
@@ -65,6 +347,22 @@ ul {
   position: fixed;
   bottom: 2em;
   right: 4em;
+}
+
+#login-btn {
+  position: fixed;
+  top: 2.5em;
+  right: 12em;
+  padding: 0.7em 1em;
+  border-radius: 0.2em;
+  font-weight: bold;
+  background: #FFA500;
+  color: black;
+  transition: background 0.5s;
+}
+#login-btn:hover {
+  transition: background 0.5s;
+  background: #ff9500;
 }
 
 #register-btn {
@@ -108,10 +406,6 @@ ul {
 }
 
 .home .button-none {
-  display: none;
-}
-
-form {
   display: none;
 }
 

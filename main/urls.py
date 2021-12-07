@@ -2,6 +2,12 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path("", views.Home, name="web-home"),
+    path("login/", views.Login.as_view(), name="web-login"),
     path("register/", views.Register, name="web-register"),
+
+    path("", views.HomeList.as_view(), name="web-home"),
+    path("inputs/<int:pk>", views.HomeDetail.as_view(), name="web-detail"),
+    path("update-inputs/", views.HomeUpdate.as_view(), name="web-update"),
+    path("create-inputs/", views.HomeCreate.as_view(), name="web-create"),
+    path("delete-inputs/", views.HomeDelete.as_view(), name="web-delete"),
 ]

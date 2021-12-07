@@ -1,0 +1,12 @@
+$background-color: black;
+$secundary-color: rgb(20, 20, 20);
+$table-color-one: orange;
+.detail {
+  width: 100vw;
+  height: 100vh;
+  .container {
+    width: 50%;
+    height: 50%;
+    margin: auto;
+  }
+}

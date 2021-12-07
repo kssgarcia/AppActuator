@@ -1,0 +1,101 @@
+$background-color: black;
+$secundary-color: rgb(20, 20, 20);
+$table-color-one: orange;
+
+/* Form */
+
+.create .container .create-form{
+  width: 23em;
+  height: 84vh;
+  border-radius: 0 0.5em 0.5em 0;
+  .form-inputs{
+    margin: 1.5em 2em;
+    width: 8em;
+    display: grid;
+    grid-template-columns: 1;
+  }
+}
+
+.create {
+  .container {
+    display: grid;
+  }
+  .form-inputs-create {
+    display: grid; 
+    grid-template-columns: repeat(2, 7em);
+    grid-auto-flow: column;
+    grid-template-rows: repeat(10, 2em);
+    column-gap: 20px;
+    row-gap: 1em;
+      input[type=number], input[type=text] {
+        width: 100%;
+        height: 3em;
+        padding: 1em 3em;
+        margin: 1em;
+        border: none;
+        border-radius: 0.5em;
+        border-color: white; 
+        background-color: rgba(255, 255, 255, 0.9);
+        color: $background-color;
+        text-align: center;
+        -webkit-transition: 1s border-color, 1s background-color;
+        transition: 1s border-color, 1s background-color;
+        &:focus {
+          background-color: rgba(87, 86, 86, 0.8);
+          box-shadow: none;
+          border: none;
+          outline: none;
+          text-align: center;
+          color: white;
+          border-color: $background-color;
+          -webkit-transition: 1s border-color, 1s background-color;
+          transition: 1s border-color, 1s background-color;
+        }
+        &::placeholder {
+          -webkit-transition: 0.7s color;
+          transition: 0.7s color;
+        }
+        &:hover::placeholder {
+          color: white;
+        }
+      }
+      label {
+        width: 8em;
+        display: none;
+      }
+      input[type=number]::-webkit-inner-spin-button,
+      input[type=number]::-webkit-outer-spin-button
+      {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      input[type=submit] {
+        position: absolute;
+        bottom: 0;
+        left: 15em;
+        display: block;
+        margin: 2em auto;
+        color: $background-color;
+        font-weight: bold;
+        border-radius: 0.5em;
+        transition: background-color 1s, color 1s;
+        -webkit-transition: background-color 1s, color 1s;
+        background-color: white;
+        border: none;
+        width: 7em;
+        height: 3.5em;
+        cursor: pointer;
+        &:hover {
+          background-color: $background-color;
+          color: white;
+          transition: background-color 1s, color 1.5s;
+          -webkit-transition: background-color 1s, color 1.5s;
+        }
+      }
+    }
+}
+
+#number-graph-create {
+  grid-column: 2 / span 1;
+  grid-row: 10 / span 1;
+}

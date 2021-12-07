@@ -11,12 +11,20 @@
 <body>
   <div class="navbar">
     <div class="container">
-      <h1>Grid App</h1>
+      <a href="{% url 'web-home' %}"><h1>GridApp</h1></a>
       <a href="https://www.instagram.com/santyago7/"><img src="https://img.icons8.com/material-outlined/24/ffffff/instagram-new.png" id="icon-1"/></a>
       <a href="https://github.com/kssgarcia"><img src="https://img.icons8.com/material-outlined/24/ffffff/github.png" id="icon-2"/></a>
       <a href="{% url 'web-register' %}" id="register-btn">Register</a>
+      {% if request.user.authentificated %}
+        <p>{{ request.user }}</p>
+        <a href="">Logout</a>
+      {% else %}
+        <a href="{% url 'web-login' %}" id="login-btn">Login</a>
+      {% endif %}
     </div>
   </div>
+
   {% block content %} {% endblock content %}
+
 </body>
 </html>
