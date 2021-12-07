@@ -75,6 +75,22 @@ ul {
   right: 4em;
 }
 
+#register-btn {
+  position: fixed;
+  top: 2.5em;
+  right: 5em;
+  padding: 0.7em 1em;
+  border-radius: 0.2em;
+  font-weight: bold;
+  background: #FFA500;
+  color: black;
+  transition: background 0.5s;
+  &:hover {
+    transition: background 0.5s;
+    background: #ff9500;
+  }
+}
+
 /* Button inputs mobile */
 .button button {
   position: fixed;
@@ -209,7 +225,7 @@ form {
 
 
 
-/* Result */
+/* Table Result */
 
 .home .container-table {
   display: flex;
@@ -386,6 +402,55 @@ form {
   }
 }
 
+/* Info style */
+
+.home .container .cform .container-information {
+  .container-symbols-left {
+    width: 2em;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: repeat(10, 3em);
+    position: absolute;
+    top: 3em;
+    left: 1em;
+    svg {
+      cursor: pointer;
+    }
+  }
+  .container-symbols-right {
+    width: 2em;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: repeat(10, 3em);
+    position: absolute;
+    top: 3em;
+    left: 19em;
+    svg {
+      cursor: pointer;
+    }
+    .symbol-graph {
+      grid-row: 10 / span 1;
+    }
+  }
+
+  ul {
+    position: fixed;
+    top: 5em;
+
+    li {
+      display: none;
+      width: 15em;
+      color: black;
+      margin-bottom: 1em;
+      background: orange;
+      padding: 0.5em;
+      text-align: center;
+      border-radius: 0.4em;
+    }
+  }
+}
+
+
 @media only screen and (min-width: 1200px) {
   body {
     overflow-y: hidden;
@@ -483,10 +548,21 @@ form {
     }
   }
 
+  .home .container .cform .container-information {
+    .container-symbols-left {
+      top: 8.5em;
+      left: unset;
+    }
+    .container-symbols-right {
+      top: 8.5em;
+      left: 30em;
+    }
+  }
+
 }
 
 
-/* Temporary style */
+/* Tabs configuration */
 
 .ui-results {
   .container-table {

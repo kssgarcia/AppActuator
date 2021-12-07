@@ -1,9 +1,8 @@
-from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
 # Create your models here.
 
-class ActuatorModels(models.Model):
+class ActuatorModel(models.Model):
     height = models.FloatField()
     force = models.FloatField()
     stroke = models.FloatField()
@@ -21,3 +20,8 @@ class ActuatorModels(models.Model):
     limXA2 = models.CharField(max_length=20)
     limYA2 = models.CharField(max_length=20)
     stepA2 = models.FloatField()
+
+class RegisterModel(models.Model):
+    username = models.CharField(max_length=10)
+    password = models.CharField(max_length=10)
+

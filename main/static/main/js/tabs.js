@@ -1,6 +1,5 @@
 const tabsBtn = document.querySelectorAll(".ui-results .container-tabs button")  
 
-let i = 0
 for (let i=0; i<4; i++) {
 
   tabsBtn[i].addEventListener('click', () => {

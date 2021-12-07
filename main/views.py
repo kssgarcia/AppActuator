@@ -1,10 +1,7 @@
 from django.shortcuts import render, redirect
-from .forms import ActuatorForms 
+from .forms import ActuatorForm, RegisterForm
 import KevinModule as kv
 from json import dumps
-
-
-import random
 
 # Create your views here.
 
@@ -12,7 +9,7 @@ def Home(request):
     dataActuatorJson = []
     dataActuator = {}
     if request.method == 'POST':
-        form = ActuatorForms(request.POST)
+        form = ActuatorForm(request.POST)
         if form.is_valid():
             form.save()
             values = list(form.cleaned_data.values())
@@ -24,12 +21,25 @@ def Home(request):
             dataActuator['dataSearch'] = actuator.SearchResult()
 
     else:
-        form = ActuatorForms()   
+        form = ActuatorForm()   
 
     dataActuatorJson.append(dumps(dataActuator))
     context = {'form': form, 'data': dataActuatorJson}
     return render(request, 'main/home.html', context)
 
+def Register(request):
+
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            print(request.POST)
+            form.save()
+            return redirect('')
+    else:
+        form = RegisterForm()
+
+    context = {'form': form}
+    return render(request, 'main/register.html', context)
 
 def cleanLim(lim):
     character = ["[", "]"]
