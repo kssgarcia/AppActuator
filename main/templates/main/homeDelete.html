@@ -1,1 +1,15 @@
-ECHO is on.
+{% extends "main/base.html" %}
+{% load static %}
+{% block content %} 
+
+<div class="delete">
+  <div class="container">
+    <form method="POST">
+      {% csrf_token %}
+      <p>Are you want to delete this profile? "{{ profile }}"</p>
+      <input type="submit" value="Delete">
+    </form>
+  </div>
+</div>
+
+{% endblock content %}

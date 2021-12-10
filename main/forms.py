@@ -2,6 +2,7 @@ from django import forms
 from .models import ActuatorModel 
 
 class ActuatorForm(forms.ModelForm):
+    title = forms.CharField(widget=forms.TextInput(attrs={ 'placeholder': 'Title'}))
     height = forms.FloatField(widget=forms.NumberInput(attrs={ 'placeholder': 'Height', 'class': 'constructor-inputs'}))
     force = forms.FloatField(widget=forms.NumberInput(attrs={ 'placeholder': 'Force', 'class': 'constructor-inputs'}))
     stroke = forms.FloatField(widget=forms.NumberInput(attrs={ 'placeholder': 'Stroke', 'class': 'constructor-inputs'}))
@@ -22,7 +23,7 @@ class ActuatorForm(forms.ModelForm):
 
     class Meta:
         model = ActuatorModel
-        fields = ['height', 'force', 'stroke', 'minLen', 'angleSimul', 'direction', 'airLoad', 'weight', 'step', 'numGraph', 'tol', 'limXA1', 'limYA1', 'stepA1', 'limXA2', 'limYA2', 'stepA2']
+        fields = ['title', 'height', 'force', 'stroke', 'minLen', 'angleSimul', 'direction', 'airLoad', 'weight', 'step', 'numGraph', 'tol', 'limXA1', 'limYA1', 'stepA1', 'limXA2', 'limYA2', 'stepA2']
 
 
 '''

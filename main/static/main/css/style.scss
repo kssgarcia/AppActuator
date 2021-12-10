@@ -10,8 +10,11 @@
 /* Detail */
 @use "components/detail";
 
-/* Detail */
+/* Create */
 @use "components/create";
+
+/* Delete */
+@use "components/delete";
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 @import url("https://fonts.adobe.com/fonts/freight-text");
@@ -29,7 +32,10 @@ $table-color-one: orange;
 }
 
 body {
+  overflow-y: hidden;
   background: $background-color;
+  padding: 0;
+  margin: 0;
 }
 
 ::-webkit-scrollbar {
@@ -93,7 +99,7 @@ ul {
 
 #login-btn {
   position: fixed;
-  top: 2.5em;
+  top: 1.8em;
   right: 12em;
   padding: 0.7em 1em;
   border-radius: 0.2em;
@@ -109,7 +115,8 @@ ul {
 
 #register-btn {
   position: fixed;
-  top: 2.5em;
+  top: 1.8em;
+  right: 12em;
   right: 5em;
   padding: 0.7em 1em;
   border-radius: 0.2em;
@@ -153,6 +160,11 @@ ul {
 }
 
 /* Form */
+.home {
+  display: grid;
+  align-items: start;
+  justify-content: center;
+}
 
 .home .container .cform{
   position: fixed;
@@ -160,7 +172,9 @@ ul {
   height: 84vh;
   background: $secundary-color;
   border-radius: 0 0.5em 0.5em 0;
+  top: 4em;
   left: -30em;
+  z-index: 999;
   .form-inputs{
     margin: 1.5em 2em;
     width: 8em;
@@ -258,16 +272,17 @@ ul {
   display: flex;
   align-items: start;
   justify-content: center;
-  margin-top: 1em;
+  margin-top: 3em;
   top: 7em;
   left: 42em;
-  height: 75vh;
+  width: 70em;
+  height: 34em;
   z-index: 0;
   overflow: auto;
   #table-result {
     font-family: sans-serif;
     border-collapse: collapse;
-    width: 87%;
+    width: auto;
     font-size: 0.7em;
     margin: 0 0 25px;
     min-width: 100px;
@@ -316,7 +331,7 @@ ul {
 .home::before {
   content: "";
   position: absolute;
-  top: 10vh;
+  top: 7em;
   right: 5vw;
   width: 90vw;
   height: 80vh; 
@@ -401,8 +416,8 @@ ul {
   grid-template-columns: repeat(5, 4.5em);
   grid-template-rows: 2em;
   row-gap: 0.5em;
-  top: 6.5vh;
-  left: 35vw;
+  top: 5em;
+  left: 6em;
     
   button {
     margin: 0 auto;
@@ -476,7 +491,6 @@ ul {
 }
 
 
-
 @media only screen and (min-width: 1200px) {
   body {
     overflow-y: hidden;
@@ -527,7 +541,7 @@ ul {
         input[type=submit] {
           bottom: 5.4em;
           left: 23.2em;
-          margin: 2em auto;
+          margin: 4em auto 0;
           color: $background-color;
           background-color: white;
           width: 7em;
@@ -542,12 +556,14 @@ ul {
   }
 
   .home .container-table {
+    width: 80em;
     display: grid;
     justify-content: center;
-    margin-top: 2em;
+    margin: 2em 0 0 -2em;
+    height: 35em;
 
     #table-result {
-      width: 60vw;
+      width: 70%;
       font-size: 0.9em;
 
       th, td {
@@ -561,10 +577,42 @@ ul {
     right: 2em;
   }
 
+  .ui-results {
+    display: grid;
+    align-content: start;
+    justify-content: center;
+
+    .container-mapGraph {
+      margin-top: -6em;
+    }
+    .container-efficiency {
+      display: none;
+      padding-top: 3em;
+      margin: auto;
+      width: 60vw;
+      height: 75vh;
+    }
+    .container-load {
+      display: none;
+      padding-top: 3em;
+      margin: auto;
+      width: 60vw;
+      height: 75vh;
+    }
+    .container-info {
+      display: none;
+      padding-top: 3em;
+      margin: auto;
+      width: 60vw;
+      height: 75vh;
+
+    }
+  }
+
   .ui-results .container-tabs {
     grid-template-columns: repeat(5, 5em);
     grid-gap: 0.2em;
-    top: 5.2vh;
+    top: 3.5em;
     left: 35vw;
     font-size: 1.2em;
 
@@ -576,55 +624,50 @@ ul {
 
   .home .container .cform .container-information {
     .container-symbols-left {
-      top: 8.5em;
+      top: 9em;
       left: unset;
     }
     .container-symbols-right {
-      top: 8.5em;
-      left: 30em;
+      top: 9em;
+      left: 29em;
     }
   }
 
 }
-
 
 /* Tabs configuration */
 
 .ui-results {
   .container-table {
     display: none;
-    padding-top: 3em;
-    margin: auto;
-    width: 75em;
-    height: 45em;
   }
   .container-mapGraph {
     display: none;
     padding-top: 3em;
     margin: auto;
-    width: 75em;
-    height: 45em;
+    width: 60vw;
+    height: 75vh;
   }
   .container-efficiency {
     display: none;
     padding-top: 3em;
     margin: auto;
-    width: 75em;
-    height: 45em;
+    width: 60vw;
+    height: 75vh;
   }
   .container-load {
     display: none;
     padding-top: 3em;
     margin: auto;
-    width: 75em;
-    height: 45em;
+    width: 60vw;
+    height: 75vh;
   }
   .container-info {
     display: none;
     padding-top: 3em;
     margin: auto;
-    width: 75em;
-    height: 45em;
+    width: 60vw;
+    height: 75vh;
 
   }
 

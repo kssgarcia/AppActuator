@@ -1,0 +1,45 @@
+$background-color: white;
+$secundary-color: rgb(20, 20, 20);
+$table-color-one: orange;
+
+.delete {
+  width: 100vw;
+  height: 100vh;
+  
+  .container {
+    width: 100vw;
+    height: 25vh;
+    margin: 20em auto 0;
+    background-color: white;
+    form {
+      width: 60vh;
+      margin: 2em auto;
+      display: grid;
+      justify-content: center;
+      p {
+        font-size: 2em;
+        color: black;
+        text-align: center;
+      }
+      input[type=submit] {
+        margin: auto;
+        width: 20em;
+        height: 3em;
+        background-color: black;
+        color: white;
+        border: none;
+        border-radius: 0.2em;
+        transition: 1s color, 1s background-color;
+        &:hover {
+          transition: 1s color, 1s background-color;
+          color: black;
+          background-color: white;
+        }
+
+
+      }
+
+    }
+  }
+
+}

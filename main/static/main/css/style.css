@@ -3,7 +3,8 @@
 /* Register */
 /* List */
 /* Detail */
-/* Detail */
+/* Create */
+/* Delete */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 @import url("https://fonts.adobe.com/fonts/freight-text");
 .login {
@@ -13,8 +14,6 @@
 .login .container {
   width: 100%;
   height: 100%;
-  display: grid;
-  align-items: center;
 }
 .login .container .lform {
   width: 40%;
@@ -28,6 +27,7 @@
 .login .container .lform form {
   height: 70%;
   display: grid;
+  margin-top: -4em;
   grid-template-columns: 30em;
   align-self: center;
   row-gap: 2em;
@@ -38,7 +38,7 @@
   font-weight: bold;
 }
 .login .container .lform form input[type=text], .login .container .lform form input[type=password] {
-  width: 90%;
+  width: 35em;
   height: 4em;
   padding: 1em 3em;
   margin: 1em;
@@ -69,6 +69,23 @@
 }
 .login .container .lform form input[type=text]:hover::placeholder, .login .container .lform form input[type=password]:hover::placeholder {
   color: white;
+}
+.login .container .lform form input[type=submit] {
+  font-size: 1em;
+  font-weight: bold;
+  margin: auto;
+  width: 25em;
+  height: 3em;
+  color: white;
+  border: none;
+  border-radius: 0.5em;
+  background-color: black;
+  transition: 1s background-color, 1s color;
+}
+.login .container .lform form input[type=submit]:hover {
+  color: black;
+  background-color: white;
+  transition: 1s background-color, 1s color;
 }
 
 .register {
@@ -140,18 +157,18 @@
   width: 100vw;
   height: 100vh;
   display: grid;
-  align-items: center;
-}
-.list a {
-  color: black;
-  text-decoration: underline;
 }
 .list .container {
-  width: 20%;
-  height: 50%;
+  width: 60%;
+  height: 60%;
   margin: auto;
+  margin-top: 4em;
   border-radius: 1em;
   background-color: white;
+  display: grid;
+  grid-template-column: 100%;
+  justify-content: center;
+  align-items: start;
 }
 .list .container .add-profile {
   display: flex;
@@ -163,21 +180,65 @@
   text-decoration: none;
   font-size: 1.5em;
   font-weight: bold;
-  color: orange;
+  padding: 1em 2em;
+  color: white;
+  border-radius: 0.5em;
+  background-color: black;
+  transition: 1s background-color, 1s color;
+}
+.list .container .add-profile a:hover {
+  transition: 1s background-color, 1s color;
+  background-color: white;
+  color: black;
+}
+.list .container h1 {
+  color: black;
+  text-align: center;
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: -1em;
+  width: 100%;
 }
 .list .container table {
   padding: 3em;
 }
-.list .container table thead tr th {
-  font-size: 2em;
-  font-weight: bold;
-  color: black;
+.list .container table tbody {
+  text-align: center;
 }
-.list .container table tbody td {
+.list .container table tbody tr td:nth-child(1) {
+  padding-bottom: 0.4em;
+  width: 7em;
+  background-color: #cccccc;
+  border-radius: 0.5em;
+  transition: 1s background-color;
+}
+.list .container table tbody tr td:nth-child(1) a {
   color: black;
+  padding: 1em;
   font-size: 1.5em;
+  font-weight: bold;
+}
+.list .container table tbody tr td:nth-child(n+2) {
+  padding-bottom: 0.1em;
+}
+.list .container table tbody tr td:nth-child(n+2) a {
+  color: black;
+  padding: 0.5em;
+  background-color: orange;
+  border-radius: 0.2em;
+  font-size: 1em;
+  transition: 1s background-color;
+}
+.list .container table tbody tr td:nth-child(n+2) a:hover {
+  transition: 1s background-color;
+  background-color: white;
 }
 
+@media only screen and (max-width: 1200px) {
+  .list .container {
+    width: 75%;
+  }
+}
 .detail {
   width: 100vw;
   height: 100vh;
@@ -205,8 +266,10 @@
   display: grid;
 }
 .create .form-inputs-create {
+  margin-top: 2em;
+  margin-left: 5em;
   display: grid;
-  grid-template-columns: repeat(2, 7em);
+  grid-template-columns: repeat(2, 10em);
   grid-auto-flow: column;
   grid-template-rows: repeat(10, 2em);
   column-gap: 20px;
@@ -220,8 +283,8 @@
   border: none;
   border-radius: 0.5em;
   border-color: white;
-  background-color: rgba(255, 255, 255, 0.9);
-  color: black;
+  background-color: rgba(20, 20, 20, 0.8);
+  color: white;
   text-align: center;
   -webkit-transition: 1s border-color, 1s background-color;
   transition: 1s border-color, 1s background-color;
@@ -233,7 +296,7 @@
   outline: none;
   text-align: center;
   color: white;
-  border-color: black;
+  border-color: white;
   -webkit-transition: 1s border-color, 1s background-color;
   transition: 1s border-color, 1s background-color;
 }
@@ -255,31 +318,68 @@
 }
 .create .form-inputs-create input[type=submit] {
   position: absolute;
-  bottom: 0;
-  left: 15em;
+  color: black;
+  bottom: 17em;
+  left: 21em;
   display: block;
   margin: 2em auto;
-  color: black;
   font-weight: bold;
   border-radius: 0.5em;
   transition: background-color 1s, color 1s;
   -webkit-transition: background-color 1s, color 1s;
   background-color: white;
   border: none;
-  width: 7em;
+  width: 12em;
   height: 3.5em;
   cursor: pointer;
 }
 .create .form-inputs-create input[type=submit]:hover {
-  background-color: black;
+  background-color: white;
   color: white;
   transition: background-color 1s, color 1.5s;
   -webkit-transition: background-color 1s, color 1.5s;
 }
 
-#number-graph-create {
+#id_numGraph {
   grid-column: 2/span 1;
   grid-row: 10/span 1;
+}
+
+.delete {
+  width: 100vw;
+  height: 100vh;
+}
+.delete .container {
+  width: 100vw;
+  height: 25vh;
+  margin: 20em auto 0;
+  background-color: white;
+}
+.delete .container form {
+  width: 60vh;
+  margin: 2em auto;
+  display: grid;
+  justify-content: center;
+}
+.delete .container form p {
+  font-size: 2em;
+  color: black;
+  text-align: center;
+}
+.delete .container form input[type=submit] {
+  margin: auto;
+  width: 20em;
+  height: 3em;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 0.2em;
+  transition: 1s color, 1s background-color;
+}
+.delete .container form input[type=submit]:hover {
+  transition: 1s color, 1s background-color;
+  color: black;
+  background-color: white;
 }
 
 *, *::after, *::before {
@@ -291,7 +391,10 @@
 }
 
 body {
+  overflow-y: hidden;
   background: black;
+  padding: 0;
+  margin: 0;
 }
 
 ::-webkit-scrollbar {
@@ -351,7 +454,7 @@ ul {
 
 #login-btn {
   position: fixed;
-  top: 2.5em;
+  top: 1.8em;
   right: 12em;
   padding: 0.7em 1em;
   border-radius: 0.2em;
@@ -367,7 +470,8 @@ ul {
 
 #register-btn {
   position: fixed;
-  top: 2.5em;
+  top: 1.8em;
+  right: 12em;
   right: 5em;
   padding: 0.7em 1em;
   border-radius: 0.2em;
@@ -410,13 +514,21 @@ ul {
 }
 
 /* Form */
+.home {
+  display: grid;
+  align-items: start;
+  justify-content: center;
+}
+
 .home .container .cform {
   position: fixed;
   width: 23em;
   height: 84vh;
   background: #141414;
   border-radius: 0 0.5em 0.5em 0;
+  top: 4em;
   left: -30em;
+  z-index: 999;
 }
 .home .container .cform .form-inputs {
   margin: 1.5em 2em;
@@ -508,17 +620,18 @@ ul {
   display: flex;
   align-items: start;
   justify-content: center;
-  margin-top: 1em;
+  margin-top: 3em;
   top: 7em;
   left: 42em;
-  height: 75vh;
+  width: 70em;
+  height: 34em;
   z-index: 0;
   overflow: auto;
 }
 .home .container-table #table-result {
   font-family: sans-serif;
   border-collapse: collapse;
-  width: 87%;
+  width: auto;
   font-size: 0.7em;
   margin: 0 0 25px;
   min-width: 100px;
@@ -556,7 +669,7 @@ ul {
 .home::before {
   content: "";
   position: absolute;
-  top: 10vh;
+  top: 7em;
   right: 5vw;
   width: 90vw;
   height: 80vh;
@@ -629,8 +742,8 @@ ul {
   grid-template-columns: repeat(5, 4.5em);
   grid-template-rows: 2em;
   row-gap: 0.5em;
-  top: 6.5vh;
-  left: 35vw;
+  top: 5em;
+  left: 6em;
 }
 .ui-results .container-tabs button {
   margin: 0 auto;
@@ -745,7 +858,7 @@ ul {
   .home .container .form-inputs input[type=submit] {
     bottom: 5.4em;
     left: 23.2em;
-    margin: 2em auto;
+    margin: 4em auto 0;
     color: black;
     background-color: white;
     width: 7em;
@@ -757,12 +870,14 @@ ul {
   }
 
   .home .container-table {
+    width: 80em;
     display: grid;
     justify-content: center;
-    margin-top: 2em;
+    margin: 2em 0 0 -2em;
+    height: 35em;
   }
   .home .container-table #table-result {
-    width: 60vw;
+    width: 70%;
     font-size: 0.9em;
   }
   .home .container-table #table-result th, .home .container-table #table-result td {
@@ -774,10 +889,40 @@ ul {
     right: 2em;
   }
 
+  .ui-results {
+    display: grid;
+    align-content: start;
+    justify-content: center;
+  }
+  .ui-results .container-mapGraph {
+    margin-top: -6em;
+  }
+  .ui-results .container-efficiency {
+    display: none;
+    padding-top: 3em;
+    margin: auto;
+    width: 60vw;
+    height: 75vh;
+  }
+  .ui-results .container-load {
+    display: none;
+    padding-top: 3em;
+    margin: auto;
+    width: 60vw;
+    height: 75vh;
+  }
+  .ui-results .container-info {
+    display: none;
+    padding-top: 3em;
+    margin: auto;
+    width: 60vw;
+    height: 75vh;
+  }
+
   .ui-results .container-tabs {
     grid-template-columns: repeat(5, 5em);
     grid-gap: 0.2em;
-    top: 5.2vh;
+    top: 3.5em;
     left: 35vw;
     font-size: 1.2em;
   }
@@ -787,49 +932,45 @@ ul {
   }
 
   .home .container .cform .container-information .container-symbols-left {
-    top: 8.5em;
+    top: 9em;
     left: unset;
   }
   .home .container .cform .container-information .container-symbols-right {
-    top: 8.5em;
-    left: 30em;
+    top: 9em;
+    left: 29em;
   }
 }
 /* Tabs configuration */
 .ui-results .container-table {
   display: none;
-  padding-top: 3em;
-  margin: auto;
-  width: 75em;
-  height: 45em;
 }
 .ui-results .container-mapGraph {
   display: none;
   padding-top: 3em;
   margin: auto;
-  width: 75em;
-  height: 45em;
+  width: 60vw;
+  height: 75vh;
 }
 .ui-results .container-efficiency {
   display: none;
   padding-top: 3em;
   margin: auto;
-  width: 75em;
-  height: 45em;
+  width: 60vw;
+  height: 75vh;
 }
 .ui-results .container-load {
   display: none;
   padding-top: 3em;
   margin: auto;
-  width: 75em;
-  height: 45em;
+  width: 60vw;
+  height: 75vh;
 }
 .ui-results .container-info {
   display: none;
   padding-top: 3em;
   margin: auto;
-  width: 75em;
-  height: 45em;
+  width: 60vw;
+  height: 75vh;
 }
 .ui-results .show {
   display: flex;
