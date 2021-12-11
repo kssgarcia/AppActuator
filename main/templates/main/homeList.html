@@ -8,23 +8,24 @@
         <a href="{% url 'web-create' %}">Add Profile</a>
     </div>
     <h1>Profiles Inputs</h1>
-    <table>
-      <tbody>
-        {% for profile in actuatorProfile %}
-        <tr>
-          <td><a href="{% url 'web-result' profile.id %}">{{ profile.title }}</a></td>
-          <td><a href="{% url 'web-detail' profile.id %}">View</a></td>
-          <td><a href="{% url 'web-update' profile.id %}">Edit</a></td>
-          <td><a href="{% url 'web-delete' profile.id %}">Delete</a></td>
-        </tr>
-        {% empty %}
-        <tr>
-          <td>No items. Please create one.</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-      
+    <div class="scroll-table">
+      <table>
+        <tbody>
+          {% for profile in actuatorProfile %}
+          <tr>
+            <td><a href="{% url 'web-result' profile.id %}">{{ profile.title }}</a></td>
+            <td><a href="{% url 'web-detail' profile.id %}">View</a></td>
+            <td><a href="{% url 'web-update' profile.id %}">Edit</a></td>
+            <td><a href="{% url 'web-delete' profile.id %}">Delete</a></td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td>No items. Please create one.</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>
 

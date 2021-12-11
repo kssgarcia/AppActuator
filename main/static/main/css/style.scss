@@ -100,7 +100,7 @@ ul {
 #login-btn {
   position: fixed;
   top: 1.8em;
-  right: 12em;
+  right: 5em;
   padding: 0.7em 1em;
   border-radius: 0.2em;
   font-weight: bold;
@@ -117,7 +117,6 @@ ul {
   position: fixed;
   top: 1.8em;
   right: 12em;
-  right: 5em;
   padding: 0.7em 1em;
   border-radius: 0.2em;
   font-weight: bold;
@@ -128,6 +127,15 @@ ul {
     transition: background 0.5s;
     background: #ff9500;
   }
+}
+
+#user-name {
+  position: fixed;
+  top: 1em;
+  right: 10em;
+  font-weight: bold;
+  font-size: 1.2em;
+
 }
 
 /* Button inputs mobile */

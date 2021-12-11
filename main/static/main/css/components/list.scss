@@ -50,6 +50,11 @@ $table-color-one: orange;
       width: 100%;
     }
 
+    .scroll-table {
+      overflow: auto;
+      height: 15em;
+    }
+
     table {
       padding: 3em;
       tbody {

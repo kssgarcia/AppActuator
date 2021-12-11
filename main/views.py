@@ -7,30 +7,48 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
 from django.urls import reverse_lazy
 import KevinModule as kv
 from json import dumps
 
 # Create your views here.
 
-
 class Login(LoginView):
     template_name = 'main/login.html'
-    field = '__all__'
+    fields = '__all__'
     redirect_authentificated_user = True
-    context = {'form': field}
 
     def get_success_url(self):
         return reverse_lazy('web-home')
 
-def Register(request):
-    return render(request, 'main/register.html')
+class Register(FormView):
+    template_name = 'main/register.html'
+    form_class = UserCreationForm
+    redirect_authentificated_user = True
+    success_url = reverse_lazy('web-home')
+    def form_valid(self, form):
+        user = form.save()
+        if user is not None:
+            login(self.request, user)
+        return super(Register, self).form_valid(form)
+
+    def get(self, *args,**kwargs):
+        if self.request.user.is_authenticated:
+            return redirect('web-home')
+        return super(Register, self).get(*args, **kwargs)
 
 # Home Page
-class HomeList(LoginRequiredMixin, ListView):
+class HomeList(ListView):
     model = ActuatorModel
     template_name = 'main/homeList.html'
     context_object_name = 'actuatorProfile'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs) 
+        context['actuatorProfile'] = context['actuatorProfile'].filter(user=self.request.user)
+        return context
 
 # Details Page
 class HomeDetail(LoginRequiredMixin, DetailView):
@@ -53,7 +71,7 @@ class HomeCreate(LoginRequiredMixin, CreateView):
 class HomeUpdate(LoginRequiredMixin, UpdateView):
     template_name =  'main/homeCreate.html'
     model = ActuatorModel
-    fields = '__all__'
+    fields = ['title', 'height', 'force', 'stroke', 'minLen', 'angleSimul', 'direction', 'airLoad', 'weight', 'step', 'numGraph', 'tol', 'limXA1', 'limYA1', 'stepA1', 'limXA2', 'limYA2', 'stepA2']
     success_url = reverse_lazy('web-home')
 
 # Delete profile Page
@@ -86,7 +104,6 @@ class displayResult(LoginRequiredMixin, UpdateView):
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
         context['data'] = self.dataActuatorJson
-        print(context)
         return context
     
     def cleanLim(self, lim):
@@ -94,7 +111,3 @@ class displayResult(LoginRequiredMixin, UpdateView):
         for char in character:
             lim = lim.strip(char)
         return map(float, lim.split(","))
-
-#print(dir(displayResult))
-# 0.278, 10000.0, 0.45, 0.520, 135.0, -1, 0.4, -4561.65, 0.1, 16, 0.01
-# [-0.5, -0.05], [-1.5, -0.1], 0.01 ,<WSGIRequest: GET '/result/'> [0.2, 0.5], [0.062, 0.062], 0.01

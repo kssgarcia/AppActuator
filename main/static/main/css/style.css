@@ -16,7 +16,7 @@
   height: 100%;
 }
 .login .container .lform {
-  width: 40%;
+  width: 90%;
   height: 60%;
   margin: 9em auto auto;
   background: white;
@@ -27,9 +27,10 @@
 .login .container .lform form {
   height: 70%;
   display: grid;
+  align-self: center;
+  justify-items: center;
   margin-top: -4em;
   grid-template-columns: 30em;
-  align-self: center;
   row-gap: 2em;
 }
 .login .container .lform form label {
@@ -38,7 +39,7 @@
   font-weight: bold;
 }
 .login .container .lform form input[type=text], .login .container .lform form input[type=password] {
-  width: 35em;
+  width: 100%;
   height: 4em;
   padding: 1em 3em;
   margin: 1em;
@@ -73,8 +74,8 @@
 .login .container .lform form input[type=submit] {
   font-size: 1em;
   font-weight: bold;
-  margin: auto;
-  width: 25em;
+  margin-left: 2em;
+  width: 80%;
   height: 3em;
   color: white;
   border: none;
@@ -95,13 +96,11 @@
 .register .container {
   width: 100%;
   height: 100%;
-  display: grid;
-  align-items: center;
 }
 .register .container .rform {
-  width: 40%;
-  height: 60%;
-  margin: 9em auto auto;
+  width: 90%;
+  height: 70%;
+  margin: 6em auto auto;
   background: white;
   border-radius: 1em;
   display: flex;
@@ -110,20 +109,31 @@
 .register .container .rform form {
   height: 70%;
   display: grid;
-  grid-template-columns: 30em;
   align-self: center;
+  justify-items: center;
+  margin-top: -4em;
+  grid-template-columns: 30em;
   row-gap: 2em;
 }
-.register .container .rform form label {
+.register .container .rform form ul {
+  margin: -1.5em 0 -3em;
+}
+.register .container .rform form ul li {
+  color: black;
+}
+.register .container .rform form p {
+  margin: 0;
+  width: 100%;
+}
+.register .container .rform form p label {
+  display: block;
   color: black;
   font-size: 1.5em;
   font-weight: bold;
 }
-.register .container .rform form input[type=text] {
-  width: 90%;
+.register .container .rform form p input[type=text], .register .container .rform form p input[type=password] {
+  width: 100%;
   height: 4em;
-  padding: 1em 3em;
-  margin: 1em;
   border: none;
   border-radius: 0.5em;
   border-color: white;
@@ -133,7 +143,7 @@
   -webkit-transition: 1s border-color, 1s background-color;
   transition: 1s border-color, 1s background-color;
 }
-.register .container .rform form input[type=text]:focus {
+.register .container .rform form p input[type=text]:focus, .register .container .rform form p input[type=password]:focus {
   background-color: rgba(87, 86, 86, 0.8);
   box-shadow: none;
   border: none;
@@ -144,13 +154,34 @@
   -webkit-transition: 1s border-color, 1s background-color;
   transition: 1s border-color, 1s background-color;
 }
-.register .container .rform form input[type=text]::placeholder {
+.register .container .rform form p input[type=text]::placeholder, .register .container .rform form p input[type=password]::placeholder {
   -webkit-transition: 0.7s color;
   transition: 0.7s color;
   color: grey;
 }
-.register .container .rform form input[type=text]:hover::placeholder {
+.register .container .rform form p input[type=text]:hover::placeholder, .register .container .rform form p input[type=password]:hover::placeholder {
   color: white;
+}
+.register .container .rform form p span {
+  color: #c8c8c8;
+}
+.register .container .rform form input[type=submit] {
+  font-size: 1em;
+  font-weight: bold;
+  margin-top: -1em;
+  margin-left: 2em;
+  width: 80%;
+  height: 3em;
+  color: white;
+  border: none;
+  border-radius: 0.5em;
+  background-color: black;
+  transition: 1s background-color, 1s color;
+}
+.register .container .rform form input[type=submit]:hover {
+  color: black;
+  background-color: white;
+  transition: 1s background-color, 1s color;
 }
 
 .list {
@@ -198,6 +229,10 @@
   font-weight: bold;
   margin-bottom: -1em;
   width: 100%;
+}
+.list .container .scroll-table {
+  overflow: auto;
+  height: 15em;
 }
 .list .container table {
   padding: 3em;
@@ -455,7 +490,7 @@ ul {
 #login-btn {
   position: fixed;
   top: 1.8em;
-  right: 12em;
+  right: 5em;
   padding: 0.7em 1em;
   border-radius: 0.2em;
   font-weight: bold;
@@ -472,7 +507,6 @@ ul {
   position: fixed;
   top: 1.8em;
   right: 12em;
-  right: 5em;
   padding: 0.7em 1em;
   border-radius: 0.2em;
   font-weight: bold;
@@ -483,6 +517,14 @@ ul {
 #register-btn:hover {
   transition: background 0.5s;
   background: #ff9500;
+}
+
+#user-name {
+  position: fixed;
+  top: 1em;
+  right: 10em;
+  font-weight: bold;
+  font-size: 1.2em;
 }
 
 /* Button inputs mobile */
