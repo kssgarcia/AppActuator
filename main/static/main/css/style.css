@@ -243,12 +243,12 @@
 .list .container table tbody tr td:nth-child(1) {
   padding-bottom: 0.4em;
   width: 7em;
-  background-color: #cccccc;
+  background-color: #2e2e2e;
   border-radius: 0.5em;
   transition: 1s background-color;
 }
 .list .container table tbody tr td:nth-child(1) a {
-  color: black;
+  color: white;
   padding: 1em;
   font-size: 1.5em;
   font-weight: bold;
@@ -813,9 +813,9 @@ ul {
   width: 2em;
   display: grid;
   grid-template-columns: auto;
-  grid-template-rows: repeat(10, 3em);
+  grid-template-rows: repeat(9, 3em);
   position: absolute;
-  top: 3em;
+  top: 6em;
   left: 1em;
 }
 .home .container .cform .container-information .container-symbols-left svg {
@@ -974,7 +974,7 @@ ul {
   }
 
   .home .container .cform .container-information .container-symbols-left {
-    top: 9em;
+    top: 12em;
     left: unset;
   }
   .home .container .cform .container-information .container-symbols-right {
@@ -1016,6 +1016,20 @@ ul {
 }
 .ui-results .show {
   display: flex;
+}
+
+/* Principal Page */
+.principal .container {
+  height: 80vh;
+  width: 100vw;
+  display: grid;
+  align-items: center;
+}
+.principal .container h1 {
+  margin: 0 auto 4em;
+  text-align: center;
+  width: 50%;
+  font-size: 5em;
 }
 
 /*# sourceMappingURL=style.css.map */

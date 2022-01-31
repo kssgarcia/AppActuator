@@ -457,9 +457,9 @@ ul {
     width: 2em;
     display: grid;
     grid-template-columns: auto;
-    grid-template-rows: repeat(10, 3em);
+    grid-template-rows: repeat(9, 3em);
     position: absolute;
-    top: 3em;
+    top: 6em;
     left: 1em;
     svg {
       cursor: pointer;
@@ -632,7 +632,7 @@ ul {
 
   .home .container .cform .container-information {
     .container-symbols-left {
-      top: 9em;
+      top: 12em;
       left: unset;
     }
     .container-symbols-right {
@@ -685,3 +685,16 @@ ul {
 
 } 
 
+/* Principal Page */
+.principal .container {
+  height: 80vh;
+  width: 100vw;
+  display: grid;
+  align-items: center;
+  h1 {
+    margin: 0 auto 4em;
+    text-align: center;
+    width: 50%;
+    font-size: 5em;
+  }
+}

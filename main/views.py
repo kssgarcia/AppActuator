@@ -13,6 +13,9 @@ from django.urls import reverse_lazy
 import KevinModule as kv
 from json import dumps
 
+def Principal(request):
+    return render(request, 'main/principal.html')
+
 # Create your views here.
 
 class Login(LoginView):
